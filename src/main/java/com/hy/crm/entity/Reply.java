@@ -26,5 +26,31 @@ public class Reply{
 
     private String replytime;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
+
+    public String getReplyName() {
+        return replyName;
+    }
+
+    public void setReplyName(String replyName) {
+        this.replyName = replyName;
+    }
+
+    public String getReplytime() {
+        return replytime;
+    }
+
+    public void setReplytime(String replytime) {
+        this.replytime = replytime;
+    }
 }

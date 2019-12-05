@@ -31,5 +31,55 @@ public class Documentary {
 
     private String accessory;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
+    }
+
+    public String getDocudate() {
+        return docudate;
+    }
+
+    public void setDocudate(String docudate) {
+        this.docudate = docudate;
+    }
+
+    public String getDocutheme() {
+        return docutheme;
+    }
+
+    public void setDocutheme(String docutheme) {
+        this.docutheme = docutheme;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
+    }
 }

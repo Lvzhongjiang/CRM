@@ -27,5 +27,31 @@ public class Permission{
     @TableField("perUrl")
     private String perUrl;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getPerId() {
+        return perId;
+    }
+
+    public void setPerId(Integer perId) {
+        this.perId = perId;
+    }
+
+    public String getPerName() {
+        return perName;
+    }
+
+    public void setPerName(String perName) {
+        this.perName = perName;
+    }
+
+    public String getPerUrl() {
+        return perUrl;
+    }
+
+    public void setPerUrl(String perUrl) {
+        this.perUrl = perUrl;
+    }
 }
