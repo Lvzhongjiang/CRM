@@ -10,28 +10,56 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-<div style="display: inline">
-    <font size="4">售后服务</font><br>
-    <font size="3">分类</font><br>
-    <a href="#">所有分类</a><br>
-    <a href="#">处理中的服务</a><br>
-    <a href="#">已结束的服务</a><br>
-    <a href="#">已撤销的服务</a><br>
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <font size="4" color="#6495ed">售后服务分类:</font>&nbsp;&nbsp;&nbsp;
+        <a href="#" onclick="onEdit('-1')">所有分类</a>&nbsp;&nbsp;
+        <a href="#" onclick="onEdit('0')">处理中的服务</a>&nbsp;&nbsp;
+        <a href="#" onclick="onEdit('1')">已结束的服务</a>&nbsp;&nbsp;
+        <a href="#" onclick="onEdit('2')">已撤销的服务</a>&nbsp;&nbsp;
+        <a href="#">本周新增</a>&nbsp;&nbsp;
+        <a href="#">上周新增</a>&nbsp;&nbsp;
+        <a href="#">本月新增</a>&nbsp;&nbsp;
+        <a href="#">上月新增</a>&nbsp;&nbsp;
+        <a href="#">本季度新增</a>&nbsp;&nbsp;
+        <a href="#">上季度新增</a></font>
+        <hr>
+    </div>
 </div>
-<table class="layui-hide" id="test" lay-filter="test"></table>
+<form class="layui-form" action="" lay-filter="example">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <select name="type" id="type" id="dept" lay-filter="aihao">
+                    <option value="0">请选择</option>
+                    <option value="1">按主题</option>
+                    <option value="2">按服务类型</option>
+                    <option value="3">按开始时间</option>
+                    <option value="4">按服务人员</option>
+                    <option value="5">按服务评分</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" name="title" id="title" lay-verify="title" autocomplete="off" placeholder="请输关键字" class="layui-input" style="width:250px">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
+            </div>
+        </div>
+    </div>
 
+</form>
+<table class="layui-hide" id="test" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add">新增售后</button>
-        <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
     </div>
 </script>
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑售后</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
-
-
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -53,7 +81,6 @@
                 ,{field:'starttime', title:'开始时间', width:120}
                 ,{field:'personnel', title:'服务人员', width:200}
                 ,{field:'Servicescore', title:'服务评分', width:100,sort: true}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
             ]]
             ,page: true
             ,limit:3
@@ -158,14 +185,24 @@
         form.on('submit(demo1)', function(data){
             table.reload('test', {
                 where: {
-                    stuname: data.field.stuname
-                    ,stusex: data.field.stusex
-                    ,deptno:data.field.did
+                    type: data.field.type
+                    ,title: data.field.title
                     //…
                 }
             });
             return false;
         });
+        window.onEdit = function(id){
+            table.reload('test', {
+                where: {
+                    id:id,
+                    type: $("#type").val()
+                    ,title: $("#title").val()
+                    //…
+                }
+            });
+        }
+
     });
 </script>
 </body>
