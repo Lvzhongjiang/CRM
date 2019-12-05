@@ -81,12 +81,12 @@ public class RealmDemo extends AuthorizingRealm{
         return simpleAuthorizationInfo;
     }
     //MD5加密
-    public static void main(String[] args){
-        String hashAlgorithmName = "MD5";//加密方式
-        Object credentials = "123456789";//要加密的密码
-        Object salt = ByteSource.Util.bytes("admin");//加的盐
-        int hashIterations = 1024;//加密次数
-        Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
-        System.out.println(result);
-    }
+//    public static void main(String[] args){
+//        String hashAlgorithmName = "MD5";//加密方式
+//        Object credentials = "123456789";//要加密的密码
+//        Object salt = ByteSource.Util.bytes("admin");//加的盐
+//        int hashIterations = 1024;//加密次数
+//        Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
+//        System.out.println(result);
+//    }
 }
