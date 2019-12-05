@@ -36,8 +36,8 @@
         <property name="filterChainDefinitions">
             <value>
                 /StudentList.html=perms["queryall"]
-                /login1.do=anon
-                /index.html=anon
+                /log.do=anon
+                /login.html=anon
                 /**.do=authc
                 /**.html=authc
             </value>

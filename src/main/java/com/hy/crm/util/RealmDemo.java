@@ -1,13 +1,19 @@
 package com.hy.crm.util;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hy.crm.entity.User;
+import com.hy.crm.service.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RealmDemo extends AuthorizingRealm{
+    @Autowired
+    private IUserService userService;
     /**
      * 授权
      * @param principalCollection
@@ -48,6 +54,14 @@ public class RealmDemo extends AuthorizingRealm{
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        UsernamePasswordToken usernamePasswordToken=(UsernamePasswordToken)authenticationToken;
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("number",usernamePasswordToken.getUsername());
+        User user=userService.getOne(queryWrapper);
+        if(user==null){
+            throw  new UnknownAccountException("此用户不存在");
+        }
+        SimpleAuthenticationInfo simpleAuthorizationInfo=new SimpleAuthenticationInfo(usernamePasswordToken.getUsername(),usernamePasswordToken.getPassword(),getName());
        /* SimpleAuthenticationInfo simpleAuthenticationInfo;
         //将传过来的AuthenticationToken转换为UsernamePasswordToken
         UsernamePasswordToken usernamePasswordToken=(UsernamePasswordToken)authenticationToken;
@@ -64,7 +78,7 @@ public class RealmDemo extends AuthorizingRealm{
              simpleAuthenticationInfo = new SimpleAuthenticationInfo("-1", "0cb506c8c95a66e87c463bf1a270446c",byteSource, getName());
         }*/
 
-        return null;
+        return simpleAuthorizationInfo;
     }
     //MD5加密
     public static void main(String[] args){
