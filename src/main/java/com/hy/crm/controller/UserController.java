@@ -8,9 +8,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,13 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jobob
  * @since 2019-12-04
  */
-@RestController
+
 @RequestMapping("/user")
+@Controller
 public class UserController{
+    //登录
     @Autowired
     private IUserService userService;
     @RequestMapping("/log.do")
-    private String  Log(@RequestParam("number")String number,@RequestParam("password")String password){
+    public String  Log(@RequestParam("number")String number,@RequestParam("password")String password){
         UsernamePasswordToken Token=new UsernamePasswordToken(number,password);
         Subject subject= SecurityUtils.getSubject();
         subject.login(Token);
@@ -35,5 +39,11 @@ public class UserController{
        subject.getSession().setAttribute("users",users);
         return "redirect:/index.html";
 
+    }
+    //注册
+    @RequestMapping("/reis.do")
+    public String reis(User user){
+        userService.saves(user);
+        return "redirect:/login.html";
     }
 }
