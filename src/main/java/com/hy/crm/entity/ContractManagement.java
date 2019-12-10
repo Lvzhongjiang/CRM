@@ -45,16 +45,17 @@ public class ContractManagement{
 
     private Long cellphone;
 
+    @TableField("emaile_qq")
     private String emaileQq;
-
+    @TableField("tech_term")
     private String techTerm;
-
+    @TableField("com_clause")
     private String comClause;
 
     private String accessory;
-
+    @TableField("coll_term")
     private String collTerm;
-
+    @TableField("relat_per")
     private String relatPer;
 
     public static long getSerialVersionUID() {

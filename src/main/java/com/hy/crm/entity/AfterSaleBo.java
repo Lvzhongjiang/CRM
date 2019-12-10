@@ -1,72 +1,38 @@
 package com.hy.crm.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-
-
-/**
- * <p>
- * 
- * </p>
- *
- * @author jobob
- * @since 2019-12-04
- */
-@Data
-public class Aftersale {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "aid", type = IdType.AUTO)
-    private Integer aid;
-
+public class AfterSaleBo {
+    private String aid;
     private String theme;
-
-    private Integer clientid;
-
-    private Integer contractid;
-
+    private String customername;
+    private String contName;
     private String maincontent;
-
-    @TableField("Contactperson")
     private String Contactperson;
-
     private String fixedtelephones;
-
     private String mobiletelephones;
-
     private String post;
-
-    private Integer typeservice;
-
-    private Integer modelservice;
-
+    private String title;
+    private String modelservice;
     private String starttime;
-
     private String endtime;
-
     private String content;
-
     private String feedback;
-
     private String personnel;
-
-    @TableField("Servicescore")
+    private String attachment;
     private String Servicescore;
 
-    private String attachment;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getServicescore() {
+        return Servicescore;
     }
 
-    public Integer getAid() {
+    public void setServicescore(String servicescore) {
+        Servicescore = servicescore;
+    }
+
+    public String getAid() {
         return aid;
     }
 
-    public void setAid(Integer aid) {
+    public void setAid(String aid) {
         this.aid = aid;
     }
 
@@ -78,20 +44,20 @@ public class Aftersale {
         this.theme = theme;
     }
 
-    public Integer getClientid() {
-        return clientid;
+    public String getCustomername() {
+        return customername;
     }
 
-    public void setClientid(Integer clientid) {
-        this.clientid = clientid;
+    public void setCustomername(String customername) {
+        this.customername = customername;
     }
 
-    public Integer getContractid() {
-        return contractid;
+    public String getContName() {
+        return contName;
     }
 
-    public void setContractid(Integer contractid) {
-        this.contractid = contractid;
+    public void setContName(String contName) {
+        this.contName = contName;
     }
 
     public String getMaincontent() {
@@ -134,19 +100,19 @@ public class Aftersale {
         this.post = post;
     }
 
-    public Integer getTypeservice() {
-        return typeservice;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTypeservice(Integer typeservice) {
-        this.typeservice = typeservice;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Integer getModelservice() {
+    public String getModelservice() {
         return modelservice;
     }
 
-    public void setModelservice(Integer modelservice) {
+    public void setModelservice(String modelservice) {
         this.modelservice = modelservice;
     }
 
@@ -190,14 +156,6 @@ public class Aftersale {
         this.personnel = personnel;
     }
 
-    public String getServicescore() {
-        return Servicescore;
-    }
-
-    public void setServicescore(String servicescore) {
-        this.Servicescore = servicescore;
-    }
-
     public String getAttachment() {
         return attachment;
     }
@@ -205,11 +163,4 @@ public class Aftersale {
     public void setAttachment(String attachment) {
         this.attachment = attachment;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
-
-

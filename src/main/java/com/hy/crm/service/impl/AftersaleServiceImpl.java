@@ -1,5 +1,6 @@
 package com.hy.crm.service.impl;
 
+import com.hy.crm.entity.AfterSaleBo;
 import com.hy.crm.entity.Aftersale;
 import com.hy.crm.mapper.AftersaleMapper;
 import com.hy.crm.service.IAftersaleService;
@@ -16,5 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AftersaleServiceImpl extends ServiceImpl<AftersaleMapper, Aftersale> implements IAftersaleService {
-
+    public AfterSaleBo selectByAid(Integer id){
+        return this.baseMapper.selectByAid(id);
+    };
 }
