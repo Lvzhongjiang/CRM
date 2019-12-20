@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
@@ -21,8 +24,9 @@ public class RegisterIncome{
     @TableId(value = "regId", type = IdType.AUTO)
     private Integer regId;
 
-    @TableField("regName")
-    private String regName;
+    @TableField("regDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date regDate;
 
     @TableField("regClassify")
     private String regClassify;
@@ -32,19 +36,28 @@ public class RegisterIncome{
 
     private String capital;
 
+    @TableField("payment_term")
     private String paymentTerm;
 
     private String registrant;
 
-    private String relatPer;
-
+    @TableField("relat_per")
+    private String relatPer1;
+    @TableField("relat_dept")
     private String relatDept;
 
     private String unit;
 
+    @TableField("relat_cont")
     private String relatCont;
-
+    @TableField("income_sta")
     private String incomeSta;
+
+    @TableField("contId")
+    private Integer contId;
+
+    @TableField(exist = false)
+    private ContractManagement contractManagement;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -58,12 +71,12 @@ public class RegisterIncome{
         this.regId = regId;
     }
 
-    public String getRegName() {
-        return regName;
+    public Date getRegDate() {
+        return regDate;
     }
 
-    public void setRegName(String regName) {
-        this.regName = regName;
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 
     public String getRegClassify() {
@@ -106,12 +119,12 @@ public class RegisterIncome{
         this.registrant = registrant;
     }
 
-    public String getRelatPer() {
-        return relatPer;
+    public String getRelatPer1() {
+        return relatPer1;
     }
 
-    public void setRelatPer(String relatPer) {
-        this.relatPer = relatPer;
+    public void setRelatPer1(String relatPer1) {
+        this.relatPer1 = relatPer1;
     }
 
     public String getRelatDept() {
@@ -144,5 +157,21 @@ public class RegisterIncome{
 
     public void setIncomeSta(String incomeSta) {
         this.incomeSta = incomeSta;
+    }
+
+    public ContractManagement getContractManagement() {
+        return contractManagement;
+    }
+
+    public void setContractManagement(ContractManagement contractManagement) {
+        this.contractManagement = contractManagement;
+    }
+
+    public Integer getContId() {
+        return contId;
+    }
+
+    public void setContId(Integer contId) {
+        this.contId = contId;
     }
 }

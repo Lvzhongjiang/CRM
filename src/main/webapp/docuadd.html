@@ -17,12 +17,15 @@
 			<input type="text" name="docudate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
 		</div>
 	</div>
-		<div class="layui-form-item">
+	<div class="layui-form-item">
 		<label class="layui-form-label">跟单主题</label>
 		<div class="layui-input-block">
-			<input type="text" th:name="docutheme" lay-verify="title" autocomplete="off" placeholder="请输入跟单主题" class="layui-input">
+			<select name="docutheme" lay-filter="aihao">
+				<option value="">请选择</option>
+				<option th:each="bulist:${bulist}" th:value="${bulist.nid}">[[${bulist.nname}]]</option>
+			</select>
 		</div>
-		</div>
+	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">跟单人</label>
 		<div class="layui-input-block">

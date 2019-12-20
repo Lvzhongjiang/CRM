@@ -10,6 +10,24 @@
 	<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
+<form class="layui-form">
+	查找：
+	<div class="layui-inline">
+		<select name="cha" id="selt">
+			<option value="">请选择</option>
+			<option value="docudate">跟单时间</option>
+			<option value="docutheme">跟单主题</option>
+			<option value="dname">跟单人</option>
+		</select>
+	</div>
+	<div class="layui-inline">
+		<input class="layui-input" name="xie" id="xie" autocomplete="off" placeholder="请输入查找PD">
+	</div>
+	<button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+	<button type="reset" class="layui-btn">重置</button>
+
+</form>
+
 
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
@@ -19,7 +37,24 @@
 		<!--<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>-->
 	</div>
 </script>
+<script type="text/html" id="titleTpl">
+	{{#  if(d.docutheme =='1'){ }}
+	鸿运
+	{{#  if(d.docutheme =='2'){ }}
+	天猫
+	{{#  if(d.docutheme =='3'){ }}
+	阿里
+	{{#  if(d.docutheme =='4'){ }}
+	天涯
+	{{#  if(d.docutheme =='12'){ }}
+	天机
+	{{#  } else { }}
+	黄二
+	{{#  } }}
+</script>
+
 <script type="text/html" id="barDemo">
+
 	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑跟单</a>
 	<!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
 </script>
@@ -61,7 +96,7 @@
 						type:"GET",
 						url:"/stuDelete.do",
 						data:{
-							stuid:data.stuid,
+							did:data.did,
 						},
 						dataType:"json",
 						success:function(is){
@@ -83,12 +118,14 @@
 					layer.close(index);
 				});
 			}else if(layEvent === 'edit'){ //编辑
+				alert(data.did)
 				layer.open({
 					type: 2,
 					offset: 'auto',
 					shade: [0.8, '#393D49'],
 					area: ['500px', '700px'],
-					content: "/toStuUpdate.do?sid="+data.stuid,
+					content: '/documentary/toupdatea.do?did='+data.did,
+
 					end:function () {
 						table.reload('test', {});
 					}
@@ -151,9 +188,9 @@
 		form.on('submit(demo1)', function(data){
 			table.reload('test', {
 				where: {
-					stuname: data.field.stuname
-					,stusex: data.field.stusex
-					,deptno:data.field.did
+					cha: data.field.cha
+					,xie: data.field.xie
+
 					//…
 				}
 			});

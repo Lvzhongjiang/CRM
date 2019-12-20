@@ -7,8 +7,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script src="/aftersale/echarts.min.js"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
+        .div1{
+            position: absolute;
+            height:500px;
+            width:1000px;
+            top:80px;
+            left:350px;
+        }
+        .img1{
+            position: absolute;
+            height:500px;
+            width:260px;
+            top:100px;
+            left:350px;
+        }
+
+        .img2{
+            position: absolute;
+            height:500px;
+            width:260px;
+            top:380px;
+            left:350px;
+        }
+        .img3{
+            position: absolute;
+            height:500px;
+            width:260px;
+            top:680px;
+            left:350px;
+        }
+        .img4{
+            position: absolute;
+            height:500px;
+            width:260px;
+            top:980px;
+            left:350px;
+        }
+        .t1{
+            position: absolute;
+            height:600px;
+            width:500px;
+            top:80px;
+            left:700px;
+        }
+        .t2{
+            position: absolute;
+            height:600px;
+            width:500px;
+            top:380px;
+            left:700px;
+        }
+        .t3{
+            position: absolute;
+            height:600px;
+            width:500px;
+            top:680px;
+            left:700px;
+        }
+        .t4{
+            position: absolute;
+            height:600px;
+            width:500px;
+            top:980px;
+            left:700px;
+        }
         .divcss5-a{ line-height:22px}/* css 注释说明：设置行距行高22px */
         .divcss5-b{ line-height:40px}/* 设置行距行高22px */
         a:link {
@@ -33,116 +98,884 @@
                 <div class="layui-card-body">
 
                     <div  class="divcss5-b">
-                        <img  class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">本周统计</a><br>
-                        <img class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">本月统计</a><br>
-                        <img  class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">本季度统计</a><br>
-                        <img class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">本年度统计</a><br>
-                        <img  class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">商机销售漏斗</a><br>
-                        <img class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">行业分布</a><br>
-                        <img  class="img " src="http://www.axshare.cn/gsc/S3EWE1/0c/7f/0a/0c7f0a102aa0468792ba30e848859a83/images/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86/u214.png?token=83c03e91ae64566d911aeab7b9f3676d78a2e148fa0d7898866c21df92017969"/>
-                        <a href="#">商机来源</a><br>
+                        <img class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('0')">全部统计</a><br>
+                        <img  class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('1')">本周统计</a><br>
+                        <img class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('2')">本月统计</a><br>
+                        <img  class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('3')">本季度统计</a><br>
+                        <img  class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('6')">商机销售漏斗</a><br>
+                        <img class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('4')">行业分布</a><br>
+                        <img  class="img " src="/crm_css/u214.png"/>
+                        <a href="#" onclick="onEdit('5')">商机来源</a><br>
                     </div>
                     <br><br><br><br><br><br>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div id="d">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>商机数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count1}"></span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count2}"></span><span style="font-size:14px;color:#666666; " t>万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;"   id="bus_week"th:text="${countUtils.count1}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="bus_last_week" th:text="${countUtils.count2}"></span><span style="font-size:14px;color:#666666;" >个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>成交数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count3}"></span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count4}"></span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_week" th:text="${countUtils.count3}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_last_week"th:text="${countUtils.count4}" ></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>跟单数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count5}"></span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" th:text="${countUtils.count6}"></span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_week"th:text="${countUtils.count5}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_last_week"th:text="${countUtils.count6}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
+            <div class="layui-card">
+                <div class="layui-card-header"><b>合同数</b></div>
+                <div class="layui-card-body">
+                    <p style="font-size:14px;"><span style="color:#666666;">本周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="con_week"th:text="${countUtils.count3}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上周</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="con_last_week"th:text="${countUtils.count4}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>商机数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="bus_month" th:text="${countUtils.count7}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="bus_last_month" th:text="${countUtils.count8}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>成交数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_month" th:text="${countUtils.count9}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_last_month"th:text="${countUtils.count10}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>跟单数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_month" th:text="${countUtils.count11}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_last_month" th:text="${countUtils.count12}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
+            <div class="layui-card">
+                <div class="layui-card-header"><b>合同数</b></div>
+                <div class="layui-card-body">
+                    <p style="font-size:14px;"><span style="color:#666666;">本月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="con_month"th:text="${countUtils.count9}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上月</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;"id="con_last_month"th:text="${countUtils.count10}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>商机数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="bus_quarter" th:text="${countUtils.count13}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="bus_last_quarter" th:text="${countUtils.count14}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>成交数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_quarter"th:text="${countUtils.count15}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="succ_last_quarter" th:text="${countUtils.count16}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md3">
+        <div class="layui-col-md2">
             <div class="layui-card">
                 <div class="layui-card-header"><b>跟单数</b></div>
                 <div class="layui-card-body">
-                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
-                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;">0.0</span><span style="font-size:14px;color:#666666;">万</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_quarter" th:text="${countUtils.count17}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="doc_last_quarter"th:text="${countUtils.count18}"></span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
                 </div>
             </div>
+        </div>
+        <div class="layui-col-md2">
+            <div class="layui-card">
+                <div class="layui-card-header"><b>合同数</b></div>
+                <div class="layui-card-body">
+                    <p style="font-size:14px;"><span style="color:#666666;">本季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="con_quarter" th:text="${countUtils.count15}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                    <p style="font-size:14px;"><span style="color:#666666;">上季度</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:20px;" id="con_last_quarter" th:text="${countUtils.count16}"> </span><span style="font-size:14px;color:#666666;">个</span></p> <p style="font-size:14px;"><span><br></span></p>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
-    <div style="display: none">
-        <table class="layui-hide" id="test" lay-filter="test"></table>
+    <div class="div1" id="d1" style="display: none">
+        <table class="layui-table" id="test">
+            <thead>
+                <tr>
+                <td th:rowspan="2">姓名</td>
+                <td th:colspan="2">商机数</td>
+                <td th:colspan="2">成交数</td>
+                <td th:colspan="2">跟单数</td>
+                <td th:colspan="2">合同数</td>
+                </tr>
+            <tr>
+                <!--<td th:rowspan="2">姓名</td>-->
+                <td>本周</td>
+                <td>上周</td>
+                <td>本周</td>
+                <td>上周</td>
+                <td>本周</td>
+                <td>上周</td>
+                <td>本周</td>
+                <td>上周</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${name}"></td>
+                <td th:text="${countUtils.count1}"></td>
+                <td th:text="${countUtils.count2}"></td>
+                <td th:text="${countUtils.count3}"></td>
+                <td th:text="${countUtils.count4}"> </td>
+                <td th:text="${countUtils.count5}"></td>
+                <td th:text="${countUtils.count6}"></td>
+                <td th:text="${countUtils.count3}"></td>
+                <td th:text="${countUtils.count4}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
+    <div class="div1" id="d2" style="display: none">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td th:rowspan="2">姓名</td>
+                <td th:colspan="2">商机数</td>
+                <td th:colspan="2">成交数</td>
+                <td th:colspan="2">跟单数</td>
+                <td th:colspan="2">合同数</td>
+            </tr>
+            <tr>
+                <!--<td th:rowspan="2">姓名</td>-->
+                <td>本月</td>
+                <td>上月</td>
+                <td>本月</td>
+                <td>上月</td>
+                <td>本月</td>
+                <td>上月</td>
+                <td>本月</td>
+                <td>上月</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${name}"></td>
+                <td th:text="${countUtils.count7}"></td>
+                <td th:text="${countUtils.count8}"></td>
+                <td th:text="${countUtils.count9}"></td>
+                <td th:text="${countUtils.count10}"> </td>
+                <td th:text="${countUtils.count11}"></td>
+                <td th:text="${countUtils.count12}"></td>
+                <td th:text="${countUtils.count9}"></td>
+                <td th:text="${countUtils.count10}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="div1" id="d3" style="display: none">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td th:rowspan="2">姓名</td>
+                <td th:colspan="2">商机数</td>
+                <td th:colspan="2">成交数</td>
+                <td th:colspan="2">跟单数</td>
+                <td th:colspan="2">合同数</td>
+            </tr>
+            <tr>
+                <!--<td th:rowspan="2">姓名</td>-->
+                <td>本季度</td>
+                <td>上季度</td>
+                <td>本季度</td>
+                <td>上季度</td>
+                <td>本季度</td>
+                <td>上季度</td>
+                <td>本季度</td>
+                <td>上季度</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${name}"></td>
+                <td th:text="${countUtils.count13}"></td>
+                <td th:text="${countUtils.count14}"></td>
+                <td th:text="${countUtils.count15}"></td>
+                <td th:text="${countUtils.count16}"> </td>
+                <td th:text="${countUtils.count17}"></td>
+                <td th:text="${countUtils.count18}"></td>
+                <td th:text="${countUtils.count15}"></td>
+                <td th:text="${countUtils.count16}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="div1" id="d4" style="display: none">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>行业分布</td>
+                <td>商机数</td>
+                <td>金额</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="indu:${industries}">
+                <td th:text="${indu.title}"></td>
+                <td th:text="${indu.s}"></td>
+                <td th:text="${indu.m}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt(1)" type="button">商机数柱状图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt(2)" type="button">金额柱状图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt(3)" type="button">商机数饼图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt(4)" type="button">金额饼图</button>
+        <br>
+        <br>
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="main" style="width: 600px;height:400px;"></div>
+        <div  id="main1" style="width: 600px;height:400px;display: none"></div>
+        <div id="main2" style="width: 600px;height:400px;display: none"></div>
+        <div id="main3" style="width: 600px;height:400px;display: none"></div>
+    </div>
+
+
+    <div class="div1" id="d5" style="display: none">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>商机来源</td>
+                <td>商机数</td>
+                <td>金额</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="indu:${industriess}">
+                <td th:text="${indu.title}"></td>
+                <td th:text="${indu.s}"></td>
+                <td th:text="${indu.m}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt1(1)" type="button">商机数柱状图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt1(2)" type="button">金额柱状图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt1(3)" type="button">商机数饼图</button>
+        <button class="layui-btn layui-btn-primary layui-btn-radius" onclick="bt1(4)" type="button">金额饼图</button>
+        <br>
+        <br>
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="main4" style="width: 600px;height:400px;"></div>
+        <div  id="main5" style="width: 600px;height:400px;display: none"></div>
+        <div id="main6" style="width: 600px;height:400px;display: none"></div>
+        <div id="main7" style="width: 600px;height:400px;display: none"></div>
+    </div>
+
+<div id="d6"  style="display: none">
+    <div class="img1">
+        <center> <h4>全部商机销售漏斗</h4></center><br>
+    <div  id="img1" style="width: 600px;height:300px"></div>
+    </div>
+        <!--<div>
+            <center>
+            <h4>全部商机销售漏斗</h4></center><br>
+            <img class="img " style="width: 250px;height: 250px" src="/aftersale/12.png"/>
+        </div>-->
+    <div class="img2">
+        <div>
+            <center>
+                <h4>本季度销售漏斗</h4></center><br>
+            <div  id="img2" style="width: 600px;height:300px"></div>
+        </div>
+    </div>
+    <div class="img3" >
+        <div>
+            <center>
+                <h4>上季度销售漏斗</h4></center><br>
+            <div id="img3" style="width: 600px;height:300px"></div>
+        </div>
+    </div>
+    <div class="img4">
+        <div>
+            <center>
+                <h4>本年度销售漏斗</h4></center><br>
+            <div id="img4" style="width: 600px;height:300px"></div>
+        </div>
+    </div>
+
+    <div class="t1">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>商机数</td>
+                <td>百分比</td>
+                <td>金额</td>
+                <td>百分比</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="newCount1:${newCounts}">
+                <td th:text="${newCount1.c}"></td>
+                <td th:text="${newCount1.cc}"></td>
+                <td th:text="${newCount1.s}"></td>
+                <td th:text="${newCount1.ss}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="t2">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>商机数</td>
+                <td>百分比</td>
+                <td>金额</td>
+                <td>百分比</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="newCount1:${newCounts2}">
+                <td th:text="${newCount1.c}"></td>
+                <td th:text="${newCount1.cc}"></td>
+                <td  th:text="${newCount1.s}"></td>
+                <td th:text="${newCount1.ss}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="t3">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>商机数</td>
+                <td>百分比</td>
+                <td>金额</td>
+                <td>百分比</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="newCount1:${newCountss}">
+                <td th:text="${newCount1.c}"></td>
+                <td th:text="${newCount1.cc}"></td>
+                <td  th:text="${newCount1.s}"></td>
+                <td th:text="${newCount1.ss}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="t4">
+        <table class="layui-table" id="test">
+            <thead>
+            <tr>
+                <td>商机数</td>
+                <td>百分比</td>
+                <td>金额</td>
+                <td>百分比</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="newCount1:${newCounts}">
+                <td th:text="${newCount1.c}"></td>
+                <td th:text="${newCount1.cc}"></td>
+                <td  th:text="${newCount1.s}"></td>
+                <td th:text="${newCount1.ss}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
 
 
 <script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('img1'));
+    var myChart1 = echarts.init(document.getElementById('img2'));
+    var myChart2 = echarts.init(document.getElementById('img3'));
+    var myChart3 = echarts.init(document.getElementById('img4'));
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        calculable: true,
+        series: [
+            {
+                name:'漏斗图',
+                type:'funnel',
+                left: '0%',
+                top: '0px',
+                //x2: 80,
+                bottom: 60,
+                higth:'200px',
+                width: '300px',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data:  [
+                    {value: 100, name: '初期沟通'},
+                    {value: 80, name: '方案与报价'},
+                    {value: 60, name: '竞争或投标'},
+                    {value: 40, name: '商务谈判'},
+                    {value: 20, name: '成交'}
+                ]
+            }
+        ]
+    };
+
+
+    myChart.setOption(option);
+    myChart1.setOption(option);
+    myChart2.setOption(option);
+    myChart3.setOption(option);
+</script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script type="text/javascript">
+    $.ajax({
+        type:"GET",
+        url:"/indu.do",
+        data:{
+            a:0
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '商机商机数柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['商机数']
+                },
+                xAxis: {
+                    data: ["IT|互联网|通信|电子","房产|建筑建设|物业","管理咨询|教育科研|中介服务","酒店旅游","其他"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data:is
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+
+    $.ajax({
+        type:"GET",
+        url:"/indu.do",
+        data:{
+            a:1
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main1'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '金额柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['金额']
+                },
+                xAxis: {
+                    data: ["IT|互联网|通信|电子","房产|建筑建设|物业","管理咨询|教育科研|中介服务","酒店旅游","其他"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data:is
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+    $.ajax({
+        type:"GET",
+        url:"/indu1.do",
+        data:{
+            a:0
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main2'));
+            // 指定图表的配置项和数据
+            myChart.title = '环形图';
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ["IT|互联网|通信|电子","房产|建筑建设|物业","管理咨询|教育科研|中介服务","酒店旅游","其他"]
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:is
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+
+
+    $.ajax({
+        type:"GET",
+        url:"/indu1.do",
+        data:{
+            a:1
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main3'));
+            // 指定图表的配置项和数据
+            myChart.title = '环形图';
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ["IT|互联网|通信|电子","房产|建筑建设|物业","管理咨询|教育科研|中介服务","酒店旅游","其他"]
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:is
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+</script>
+<script type="text/javascript">
+    $.ajax({
+        type:"GET",
+        url:"/indu2.do",
+        data:{
+            a:0
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main4'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '商机商机数柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['商机数']
+                },
+                xAxis: {
+                    data: ["电话访问","独立开发","二次销售","合作伙伴","互联网"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data:is
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+
+    $.ajax({
+        type:"GET",
+        url:"/indu2.do",
+        data:{
+            a:1
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main5'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '金额柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['金额']
+                },
+                xAxis: {
+                    data: ["电话访问","独立开发","二次销售","合作伙伴","互联网"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data:is
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+    $.ajax({
+        type:"GET",
+        url:"/indu3.do",
+        data:{
+            a:0
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main6'));
+            // 指定图表的配置项和数据
+            myChart.title = '环形图';
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ["电话访问","独立开发","二次销售","合作伙伴","互联网"]
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:is
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+
+
+    $.ajax({
+        type:"GET",
+        url:"/indu3.do",
+        data:{
+            a:1
+        },
+        dataType:"json",
+        success:function(is){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main7'));
+            // 指定图表的配置项和数据
+            myChart.title = '环形图';
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ["电话访问","独立开发","二次销售","合作伙伴","互联网"]
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:is
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        error:function(jqXHR){
+            console.log("Error: "+jqXHR.status);
+        }
+    });
+</script>
 <script>
     layui.use(['element', 'layer','table'], function(){
         var element = layui.element;
@@ -150,31 +983,63 @@
         var table=layui.table;
 
         window.onEdit = function(id){
-
-            var cols=[[
-                {field:'aid', title:'ID', width:200,  unresize: true, sort: true,templet:'<div>{{d.LAY_INDEX}}</div>'}
-                ,{field:'theme', title:'本周商机数', width:200}
-                ,{field:'typeservice', title:'上周商机数', width:200}
-                ,{field:'starttime', title:'本周成交数', width:200}
-                ,{field:'personnel', title:'上周成交数', width:200}
-                ,{field:'Servicescore', title:'本周跟单数', width:200}
-                ,{field:'personnel', title:'上周跟单数', width:200}
-                ,{field:'Servicescore', title:'本周合同数', width:200}
-                ,{field:'personnel', title:'上周合同数', width:200}
-            ]]
-
-            table.render({
-                elem: '#test'
-                ,url:'/afterSaleList.do'
-                ,toolbar: '#toolbarDemo'
-                ,title: '售后管理'
-                ,cols: cols
-                ,page: true
-                ,limit:3
-                ,limits:[3,5,10]
-            });
+            $("#d").hide();
+            $("#d1").hide();
+            $("#d2").hide();
+            $("#d3").hide();
+            $("#d4").hide();
+            $("#d5").hide();
+            $("#d6").hide();
+            if(id==='1'){
+                $("#d1").show();
+            }else if(id==='2'){
+                $("#d2").show();
+            }else if(id==='3'){
+                $("#d3").show();
+            }else if(id==='4'){
+                $("#d4").show();
+            }else if(id==='5'){
+                $("#d5").show();
+            }else if(id==='6'){
+                $("#d6").show();
+            }else{
+                $("#d").show();
+            }
         }
-
+        window.bt = function(id){
+            $("#main").hide();
+            $("#main1").hide();
+            $("#main2").hide();
+            $("#main3").hide();
+            if(id===1){
+                $("#main").show();
+            }else if(id===2){
+                $("#main1").show();
+            }else if(id===3){
+                $("#main2").show();
+            }else if(id===4){
+                $("#main3").show();
+            }else{
+                $("#main").show();
+            }
+        }
+        window.bt1 = function(id){
+            $("#main4").hide();
+            $("#main5").hide();
+            $("#main6").hide();
+            $("#main7").hide();
+            if(id===1){
+                $("#main4").show();
+            }else if(id===2){
+                $("#main5").show();
+            }else if(id===3){
+                $("#main6").show();
+            }else if(id===4){
+                $("#main7").show();
+            }else{
+                $("#main4").show();
+            }
+        }
         //监听折叠
         element.on('collapse(test)', function(data){
             layer.msg('展开状态：'+ data.show);

@@ -13,16 +13,18 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
 
+    <!--加载Redis配置文件 -->
+    <context:property-placeholder location="classpath:redis.properties"/>
     <!--导入redis配置-->
     <import resource="classpath:springRedis.xml"></import>
 
-  <!--  <import resource="classpath:springShiro.xml"></import>-->
+    <import resource="classpath:springShiro.xml"></import>
     <!--扫描spring配置的注解bean-->
     <context:component-scan base-package="com.hy"></context:component-scan>
     <!--配置msql的数据源-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/crm"></property>
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="${url}"></property>
         <property name="username" value="root"></property>
         <property name="password" value="huayu"></property>
     </bean>

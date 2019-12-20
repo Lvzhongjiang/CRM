@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>layui</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/static/layui/css/layui.css"  media="all">
+	<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<script type="text/html" id="toolbarDemo">
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="add">新增跟单</button>
+		<!--<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>-->
+	</div>
+</script>
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑跟单</a>
+	<!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+</script>
+
+
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+	layui.use(['form','table'], function(){
+		var table = layui.table;
+		var form = layui.form;
+		table.render({
+			elem: '#test'
+			,url:'/documentary/dolis.do'
+			,toolbar: '#toolbarDemo'
+			,title: '我的跟单管理'
+			,cols: [[
+				{type: 'checkbox', fixed: 'left'}
+				,{field:'did', title:'ID', width:80, fixed: 'left', unresize: true, sort: true,templet:'<div>{{d.LAY_INDEX}}</div>'}
+				,{field:'docudate', title:'跟单时间', width:200}
+				,{field:'docutheme', title:'跟单主题', width:100}
+				,{field:'dname', title:'跟单人', width:120}
+				,{field:'content', title:'详细内容', width:200}
+				,{field:'accessory', title:'附件', width:100,sort: true}
+				,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+			]]
+			,page: true
+			,limit:3
+			,limits:[3,5,10]
+		});
+		table.on('tool(test)', function(obj){
+			var data = obj.data;
+			var layEvent = obj.event;
+			if(layEvent === 'del'){
+				layer.confirm('真的删除行么', function(index){
+					$.ajax({
+						type:"GET",
+						url:"/stuDelete.do",
+						data:{
+							did:data.did,
+						},
+						dataType:"json",
+						success:function(is){
+							if(is=='1'){
+								table.reload('test', {
+									page: {
+										curr: 1 //重新从第 1 页开始
+									}
+								});
+								layer.msg('删除成功', {icon: 6});
+							}else{
+								layer.msg('删除失败');
+							}
+						},
+						error:function(jqXHR){
+							console.log("Error: "+jqXHR.status);
+						}
+					});
+					layer.close(index);
+				});
+			}else if(layEvent === 'edit'){ //编辑
+				alert(data.did)
+				layer.open({
+					type: 2,
+					offset: 'auto',
+					shade: [0.8, '#393D49'],
+					area: ['500px', '700px'],
+					content: '/documentary/mytoupdatea.do?did='+data.did,
+
+					end:function () {
+						table.reload('test', {});
+					}
+				});
+			}
+		});
+
+		//监听事件
+		table.on('toolbar(test)', function(obj){
+			var ev=obj.event;
+			if(ev==='add'){
+				layer.open({
+					type: 2,
+					offset: 'auto',
+					shade: [0.8, '#393D49'],
+					area: ['500px', '700px'],
+					content: '/documentary/mytoseave.do',
+					end:function () {
+						table.reload('test', {});
+					}
+				});
+			}else if(ev==='delete'){
+				layer.confirm('真的删除行么', function(index){
+					var ee='';
+					var checkStatus = table.checkStatus('test');
+					var data=checkStatus.data;
+					for(var i=0;i<data.length;i++){
+						if(i<data.length-1){
+							ee=ee+data[i].stuid+",";
+						}else{
+							ee=ee+data[i].stuid;
+						}
+					}
+					$.ajax({
+						type:"get",
+						url:"/stuDeletes.do",
+						data:{
+							stuids:ee,
+						},
+						dataType:"json",
+						success:function(is){
+							if(is=='1'){
+								table.reload('test', {
+									page: {
+										curr: 1 //重新从第 1 页开始
+									}
+								});
+								layer.msg('删除成功', {icon: 6});
+							}else{
+								layer.msg('删除失败');
+							}
+						},
+						error:function(jqXHR){
+							console.log("Error: "+jqXHR.status);
+						}
+					});
+				});
+			}
+		});
+		form.on('submit(demo1)', function(data){
+			table.reload('test', {
+				where: {
+					stuname: data.field.stuname
+					,stusex: data.field.stusex
+					,deptno:data.field.did
+					//…
+				}
+			});
+			return false;
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>合同管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>合同</legend>
+</fieldset>
+
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md2">
+            <div class="layui-card" style="height: 500px">
+                <div class="layui-card-header">分类</div>
+                <div class="layui-card-body">
+                    所有分类<br>
+                    <a href="#"  onclick="statusss(1)">执行中的合同&emsp;<span id="zx"></span></a><br>
+                    <a href="#"  onclick="statusss(2)">已关闭的合同&emsp;<span id="yg"></span></a><br>
+                    <a href="#"  onclick="statusss(3)">已撤出的合同&emsp;<span id="yc"></span></a><br>
+                    <a href="#"  onclick="statusss(4)">已搁置的合同&emsp;<span id="yz"></span></a>
+                </div>
+                <div class="layui-card-body">
+                    本周新增&emsp;<span id="benZhou"></span><br>
+                    上周新增&emsp;<span id="shangZhou"></span><br>
+                    本月新增&emsp;<span id="benYue"></span><br>
+                    上月新增&emsp;<span id="shangYue"></span><br>
+                    本季度新增&emsp;<span id="benJiDu"></span><br>
+                    上季度新增&emsp;<span id="shangJiDu"></span>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md8" style="width:80%">
+            <div class="layui-card">
+                <div class="layui-card-body" style="height: 500px;width: 100%">
+                    <form class="layui-form" lay-filter="example">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline" style="margin-left: 100px">
+                                <select name="heTong" id="conType">
+                                    <option value='-1'>请选择</option>
+                                    <option value='1'>按合同全称</option>
+                                    <option value='2'>按合同编号</option>
+                                    <option value='3'>按合同所属部门</option>
+                                    <option value='4'>按关联人员</option>
+                                    <option value='5'>按合同金额</option>
+                                    <option value='6'>按签约日期</option>
+                                </select>
+
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-block">
+                                    <input name="keyword" lay-verify="title" autocomplete="off" placeholder="请输入关键字"
+                                           class="layui-input"
+                                           type="text">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-block">
+                                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="mhtj">查询
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <table class="layui-hide" id="test" lay-filter="test"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">新增合同</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑合同</a>
+</script>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script type="text/html" id="registerIncome">
+    {{#  if(d.s==null){ }}
+    <a href="/crm/register-income/toAddRegisterList.do?contName={{d.contName}}">0.00</a>
+    {{#  } else { }}
+    <a href="/crm/register-income/toAddRegisterList.do?contName={{d.contName}}">{{d.s}}</a>
+    {{#  } }}
+</script>
+<script type="text/html" id="invoiceApplication">
+    {{#  if(d.s1==null){ }}
+    <a href="/crm/invoice-application/toAddInvoiceList.do?contName={{d.contName}}">0.00</a>
+    {{#  } else { }}
+    <a href="/crm/invoice-application/toAddInvoiceList.do?contName={{d.contName}}">{{d.s1}}</a>
+    {{#  } }}
+</script>
+<script type="text/html" id="contName">
+    {{#  if(d.contName==null){ }}
+    <a href="/crm/contract-management/selectContractList.do?contName={{d.contName}}"> </a>
+    {{#  } else { }}
+    <a href="/crm/contract-management/selectContractList.do?contName={{d.contName}}">{{d.contName}}</a>
+    {{#  } }}
+</script>
+<script>
+    layui.use(['form', 'table', 'util', 'element'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var util = layui.util;
+        var element = layui.element;
+        table.render({
+            elem: '#test'
+            , url: '/crm/contract-management/contractList.do'
+            , toolbar: '#toolbarDemo'
+            , title: '合同管理'
+            , cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'contName', title: '合同名称', templet: '#contName', width: 200}
+                , {field: 'contNum', title: '合同编号', width: 100}
+                , {field: 'contMany', title: '合同金额', width: 120}
+                , {
+                    field: 'contDate', title: '签约日期', width: 200, templet: function (d) {
+                        if (d.contDate == null) {
+                            return "";
+                        }
+                        return util.toDateString(d.contDate, "yyyy-MM-dd");
+                    }
+                }/*<div>{{d.registerIncome.regMany}}</div>*//*<div>{{d.invoiceApplication.inAmount}}</div>*/
+                , {field: 's', title: '汇款额', width: 100, templet: '#registerIncome'}
+                , {field: 's1', title: '开票额', width: 100, templet: '#invoiceApplication'}
+               /* , {field: 'status', title: '合同状态', width: 100}*/
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+            ]]
+            , page: true
+            , limit: 3
+            , limits: [3, 5, 10]
+        });
+        //----------------------------------------------
+        window.statusss = function (obj){
+            var data = obj.data;
+            console.log(data);
+            table.reload('test', {
+                url: '/crm/contract-management/contractList.do'
+                ,where: {
+                    status:obj
+                } //设定异步数据接口的额外参数
+                //,height: 300
+            });
+        }
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'edit') { //编辑
+                layer.open({
+                    type: 2,
+                    offset: 'auto',
+                    shade: [0.8, '#393D49'],
+                    area: ['800px', '700px'],
+                    content: "/crm/contract-management/toUpdateContractList.do?contName=" + data.contName,
+                    end: function () {
+                        table.reload('test', {});
+                    }
+                });
+            }
+        });
+
+        //监听事件
+        table.on('toolbar(test)', function (obj) {
+            var ev = obj.event;
+            if (ev === 'add') {
+                layer.open({
+                    type: 2,
+                    offset: 'auto',
+                    shade: [0.8, '#393D49'],
+                    area: ['800px', '700px'],
+                    content: '/crm/contract-management/toAddContractList.do',
+                    end: function () {
+                        table.reload('test', {});
+                    }
+                });
+            }
+        });
+
+        //监听提交按钮，layui表单重载
+        form.on('submit(mhtj)', function (data) {
+            table.reload('test', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    heTong: data.field.heTong,//得到所有字段中name的值。
+                    keyword: data.field.keyword
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            }); //只重载数据
+            return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/cist.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("zx").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listYg.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("yg").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listYc.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("yc").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listYz.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("yz").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listBenZhou.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("benZhou").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listShangZhou.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("shangZhou").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listBenYue.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("benYue").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listShangYue.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("shangYue").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listBenJiDu.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("benJiDu").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        $.ajax({
+            //请求方式
+            type : "get",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/crm/contract-management/listShangJiDu.do",
+            //请求成功
+            success : function(data) {
+                window.document.getElementById("shangJiDu").innerHTML=data;
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

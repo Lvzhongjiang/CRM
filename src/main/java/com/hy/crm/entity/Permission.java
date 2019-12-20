@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
@@ -26,6 +26,8 @@ public class Permission{
 
     @TableField("perUrl")
     private String perUrl;
+
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

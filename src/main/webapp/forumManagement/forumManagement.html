@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>学生信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<form class="layui-form" action="" lay-filter="example">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-inline">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <select id="forum" name="forum" lay-search="">
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="1">按主题</option>
+                        <option value="2">按作者</option>
+                        <option value="3">按标签</option>
+                        <option value="4">按点击</option>
+                        <option value="5">按回复</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="请输入关键字" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="sa">查找</button>
+                <button type="reset" class="layui-btn" lay-submit="" lay-filter="">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md10">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="test" style="width: 80%" lay-filter="tool_1"></table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2" style="height: 50%">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                   <p style="color: #4bb1cf">状态: 1：普通&emsp;&emsp;2：精华 &emsp;&emsp;3：置顶</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <div class="layui-btn-group">
+            <!--添加-->
+            <button type="button" lay-event="add" class="layui-btn layui-btn-sm">
+                <i class="layui-icon">社区发帖</i>
+            </button>
+        </div>
+    </div>
+</script>
+
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<script type="text/html" id="motif">
+    {{#  if(d.motif==null){ }}
+    <a href="/crm/forum-management/tieZiById.do?forumId={{d.forumId}}" style="color: #1E0FBE"><b>null</b></a>
+    {{#  } else { }}
+    <a href="/crm/forum-management/tieZiById.do?forumId={{d.forumId}}" style="color: #1E0FBE"><b>{{d.motif}}</b></a>
+    {{#  } }}
+</script>
+<script type="text/html" id="business">
+    {{#  if(d.business==null){ }}
+    {{#  } else { }}
+    {{d.business}}
+    {{#  } }}
+</script>
+<script>
+    layui.use(['table', 'form', 'upload', 'util'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var upload = layui.upload;
+        var util = layui.util;
+        table.render({
+            elem: '#test'
+            , url: '/crm/forum-management/forumList.do'
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                , layEvent: 'LAYTABLE_TIPS'
+                , icon: 'layui-icon-tips'
+            }]
+            , title: '讨论帖子'
+            , cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'motif', title: '主题', width: 150,style:'', templet: '#motif'}
+                , {field: 'author', title: '作者', width: 150}
+                , {field: 'business', title: '所属商机', width: 150, templet: '#business'}
+                , {field: 'click', title: '点击', width: 100}
+                , {field: 'c', title: '回复', width: 100,templet:'<div>{{d.c}}</div>' }
+                , {field: 'replytime', title: '最后回复时间', width: 200, templet: function (d) {
+                        if (d.replytime == null) {
+                            return "";
+                        }
+                        return util.toDateString(d.replytime, "yyyy-MM-dd HH:mm:ss");
+                    }
+                }
+                , {field: 'status', title: '状态', width: 100}
+            ]]
+            , page: true
+            , limit: 5
+            , limits: [5, 10, 15,20]
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(tool_1)', function (obj) {
+            var data = obj.data;
+            var checkStatus = table.checkStatus(obj.config.id);
+            var even = obj.event;
+            if (even == 'add') {
+                //添加
+                layer.open({
+                    type: 2,
+                    title: "新增帖子",
+                    area: ['800px', '700px'],
+                    content: '/forumManagement/addForum.html',
+                    //弹出层关闭回调
+                    cancel: function (index, layero) {
+                        if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+                            layer.close(index)
+                        }
+                        return false;
+                    },
+
+                    //弹出层销毁回调
+                    end: function () {
+                        table.reload("test", {});
+                    }
+                });
+            }
+        });
+
+
+        //监听提交按钮，layui表单重载
+        form.on('submit(sa)', function (data) {
+            table.reload('test', {
+                where: { //设定异步数据接口的额外参数，任意设
+                    forum: data.field.forum,//得到所有字段中name的值。
+                    keyword: data.field.keyword
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            }); //只重载数据
+            return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

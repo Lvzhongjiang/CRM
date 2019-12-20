@@ -1,5 +1,6 @@
 package com.hy.crm.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hy.crm.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
     public void saves(User user);
+    IPage<User> queryPage(Integer pageNum, Integer size);
 }

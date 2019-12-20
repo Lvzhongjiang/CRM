@@ -1,0 +1,260 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>新增合同</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<form class="layui-form" action="" lay-filter="example">
+    <hr class="layui-bg-blue">
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label"><span class="layui-bg-red">*</span>客户名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="customername"  lay-verify="required"  autocomplete="off" placeholder="请输入客户名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" >
+        <label class="layui-form-label">所属行业</label>
+        <div class="layui-input-inline">
+            <select name="cid" lay-filter="ht"  lay-verify="required">
+                <option  lay-verify="required" th:each="cl,clients:${clients}"th:text="${cl.industry}" th:value="${cl.industry}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">所在城市</label>
+        <div class="layui-input-inline">
+            <input type="text" name="city"  lay-verify="required"  autocomplete="off" placeholder="请输入所在城市" class="layui-input">
+        </div>
+    </div>
+    <br/>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">详细地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="detailedaddress"  lay-verify="required"    autocomplete="off" placeholder="请输入详细地址" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>
+    <hr class="layui-bg-blue">
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label"><span class="layui-bg-red">*</span>合同名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contName" lay-verify="required" autocomplete="off" placeholder="请输入合同名称" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">合同编号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contNum" lay-verify="required" autocomplete="off" placeholder="请输入合同编号" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">合同金额</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contMany"lay-verify="required" autocomplete="off" placeholder="请输入合同金额" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">签约日期</label>
+        <div class="layui-input-inline">
+            <input type="date" name="contDate" required  lay-verify="date|required" placeholder="yyyy/MM/dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">生效日期</label>
+        <div class="layui-input-inline">
+            <input type="date" name="commenDate"   lay-verify="date|required" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">服务器至</label>
+        <div class="layui-input-inline">
+            <input type="date" name="viability"   lay-verify="date|required" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label"><span class="layui-bg-red">*</span>对方联系人</label>
+        <div class="layui-input-inline">
+            <input type="text" name="contact" lay-verify="required" autocomplete="off" placeholder="请输入对方联系人" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">固定电话</label>
+        <div class="layui-input-inline">
+            <input type="text" name="landline"  lay-verify="required" autocomplete="off" placeholder="请输入固定电话" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>  <div class="layui-input-inline" style="size: 10px">
+    <label class="layui-form-label">移动电话</label>
+    <div class="layui-input-inline">
+        <input type="text" name="cellphone"   lay-verify="required"autocomplete="off" placeholder="请输入移动电话" class="layui-input">
+    </div>
+</div>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">邮件/QQ</label>
+        <div class="layui-input-inline">
+            <input type="text" name="emaileQq"  lay-verify="required" autocomplete="off" placeholder="请输入邮件/QQ" class="layui-input">
+        </div>
+    </div>
+    <br/><br/>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">主要技术条款</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入主要技术条款"  lay-verify="required" name="techTerm" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">主要商务条款</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入主要商务条款"  lay-verify="required" name="comClause" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <br/>
+    &emsp;&emsp;&emsp;&emsp;&emsp;
+    <button type="button" class="layui-btn layui-btn-sm" id="upload">
+        <i class="layui-icon">&#xe67c;</i>上传附件</button>
+    <br/><br/>
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">所属部门</label>
+        <div class="layui-input-inline">
+            <input type="text" name="collTerm"  lay-verify="required" autocomplete="off" placeholder="请输入合同所属部门" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-input-inline" style="size: 10px">
+        <label class="layui-form-label">关联人员</label>
+        <div class="layui-input-inline">
+            <input type="text" name="relatPer"  lay-verify="required" autocomplete="off" placeholder="关联人员" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-input-inline" >
+        <label class="layui-form-label">合同状态</label>
+        <div class="layui-input-inline">
+            <select name="status" lay-filter="ht"  lay-verify="required">
+                <option value="执行中的合同">执行中的合同</option>
+                <option value="已关闭的合同">已关闭的合同</option>
+                <option value="已撤除的合同">已撤除的合同</option>
+                <option value="已搁置的合同">已搁置的合同</option>
+            </select>
+        </div>
+    </div>
+
+    <br/><br/>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script src="/static/layui/layui.all.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate','upload'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , upload = layui.upload;
+        form.verify({
+            emaileQq:function(value, item){
+                var qq = /^[1-9]{4,9}$/;
+                var email = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
+                if(value==''){
+                    return '';
+                } else{
+                    if (!qq.test(value)) {
+                        return '请填写正确的qq号';
+                    }else if(!email.test(value)){
+                        return '请填写正确的邮箱';
+                    }
+                }
+            },
+            landline:function (value,item) {
+                var reg_phone=/^1[3|5|7|8][0-9]{9}$/; //匹配9个0-9的任意数字
+                if(value==''){
+                    return '';
+                } else{
+                    if (!reg_phone.test(value)) {
+                        return '请填写正确的手机号';
+                    }
+                }
+            },
+            cellphone:function (value,item) {
+            var reg_phone=/^1[3|5|7|8][0-9]{9}$/; //匹配9个0-9的任意数字
+            if(value==''){
+                return '';
+            } else{
+                if (!reg_phone.test(value)) {
+                    return '请填写正确的手机号';
+                }
+            }
+        }
+
+        });
+        //下拉框事件
+        form.on('select(ht)', function(data){
+            console.log(data.value); //得到被选中的值
+
+        });
+
+        //监听from的提交
+        form.on('submit(demo1)', function(data){
+            console.log('我进来了');
+            $.ajax({
+                //请求地址
+                url: "/crm/contract-management/addContractList.do",
+                data:data.field,
+                type:'post',
+                traditional:true,
+                success:function(data){
+                    if(data==='1'){
+                        layer.msg('添加成功', {icon: 6,time:2000});
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }else{
+                        layer.msg('添加失败', {icon: 5,time:2000});
+                    }
+                }
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+        //执行实例
+        //上传文件
+        upload.render({
+            elem: '#upload' //绑定元素
+            ,url: '/singleUpload.do' //上传接口
+            ,accept: 'file'
+            ,done: function(res){
+                //上传完毕回调
+                if(res=='1'){
+                    layer.msg('上传成功', {icon: 6,time:2000});
+                    table.reload("test",{
+                        page:{
+                            curr:1
+                        }
+                    });
+                }else{
+                    layer.msg('上传失败', {icon: 5,time:2000});
+                }
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

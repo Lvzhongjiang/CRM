@@ -3,24 +3,35 @@ package com.hy.crm.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
  * @since 2019-12-04
  */
 @Data
-public class InvoiceApplication  {
-
+public class InvoiceApplication {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "inId", type = IdType.AUTO)
     private Integer inId;
+
+    private String motif;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
+
+    @TableField("detailedaddress")
+    private String detailedaddress1;
 
     @TableField("alName")
     private String alName;
@@ -29,36 +40,43 @@ public class InvoiceApplication  {
     private String affDept;
 
     @TableField("alDate")
-    private String alDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date alDate;
 
-    private String techTerm;
+    @TableField("tech_term")
+    private String techTerm1;
 
     private String unit;
-
-    private String relatCont;
 
     @TableField("inKind")
     private String inKind;
 
+    @TableField("reg_number")
     private String regNumber;
 
     @TableField("bankName_Id")
     private String banknameId;
 
+    @TableField("add_phone")
     private String addPhone;
 
     @TableField("inAmount")
     private Double inAmount;
 
+    @TableField("ca_amount")
     private String caAmount;
 
     @TableField("inDate")
-    private String inDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date inDate;
 
     @TableField("inNumber")
     private String inNumber;
 
     private String accessory;
+
+    @TableField(exist = false)
+    private Integer contId;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -88,20 +106,13 @@ public class InvoiceApplication  {
         this.affDept = affDept;
     }
 
-    public String getAlDate() {
-        return alDate;
+
+    public String getTechTerm1() {
+        return techTerm1;
     }
 
-    public void setAlDate(String alDate) {
-        this.alDate = alDate;
-    }
-
-    public String getTechTerm() {
-        return techTerm;
-    }
-
-    public void setTechTerm(String techTerm) {
-        this.techTerm = techTerm;
+    public void setTechTerm1(String techTerm1) {
+        this.techTerm1 = techTerm1;
     }
 
     public String getUnit() {
@@ -112,13 +123,6 @@ public class InvoiceApplication  {
         this.unit = unit;
     }
 
-    public String getRelatCont() {
-        return relatCont;
-    }
-
-    public void setRelatCont(String relatCont) {
-        this.relatCont = relatCont;
-    }
 
     public String getInKind() {
         return inKind;
@@ -168,11 +172,19 @@ public class InvoiceApplication  {
         this.caAmount = caAmount;
     }
 
-    public String getInDate() {
+    public Date getAlDate() {
+        return alDate;
+    }
+
+    public void setAlDate(Date alDate) {
+        this.alDate = alDate;
+    }
+
+    public Date getInDate() {
         return inDate;
     }
 
-    public void setInDate(String inDate) {
+    public void setInDate(Date inDate) {
         this.inDate = inDate;
     }
 
@@ -190,5 +202,37 @@ public class InvoiceApplication  {
 
     public void setAccessory(String accessory) {
         this.accessory = accessory;
+    }
+
+    public String getMotif() {
+        return motif;
+    }
+
+    public void setMotif(String motif) {
+        this.motif = motif;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getDetailedaddress1() {
+        return detailedaddress1;
+    }
+
+    public void setDetailedaddress1(String detailedaddress1) {
+        this.detailedaddress1 = detailedaddress1;
+    }
+
+    public Integer getContId() {
+        return contId;
+    }
+
+    public void setContId(Integer contId) {
+        this.contId = contId;
     }
 }

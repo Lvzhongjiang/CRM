@@ -2,19 +2,21 @@ package com.hy.crm.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
  * @since 2019-12-04
  */
 @Data
+@TableName("newbusiness")
 public class Newbusiness{
 
     private static final long serialVersionUID = 1L;
@@ -24,9 +26,9 @@ public class Newbusiness{
 
     private String nname;
 
-    private Integer priority;
+    private String priority;
 
-    private String bane;
+    private Integer cid;
 
     private String source;
 
@@ -58,6 +60,8 @@ public class Newbusiness{
 
     private String concerned;
 
+    private String stage;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -78,20 +82,20 @@ public class Newbusiness{
         this.nname = nname;
     }
 
-    public Integer getPriority() {
+    public String getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public String getBane() {
-        return bane;
+    public Integer getCid() {
+        return cid;
     }
 
-    public void setBane(String bane) {
-        this.bane = bane;
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 
     public String getSource() {
@@ -212,5 +216,13 @@ public class Newbusiness{
 
     public void setConcerned(String concerned) {
         this.concerned = concerned;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 }

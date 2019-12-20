@@ -39,7 +39,7 @@ public class Aftersale {
 
     private String post;
 
-    private Integer typeservice;
+    private String typeservice;
 
     private Integer modelservice;
 
@@ -134,11 +134,11 @@ public class Aftersale {
         this.post = post;
     }
 
-    public Integer getTypeservice() {
+    public String getTypeservice() {
         return typeservice;
     }
 
-    public void setTypeservice(Integer typeservice) {
+    public void setTypeservice(String typeservice) {
         this.typeservice = typeservice;
     }
 

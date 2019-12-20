@@ -61,7 +61,7 @@ public class RealmDemo extends AuthorizingRealm{
         if(user==null){
             throw  new UnknownAccountException("此用户不存在");
         }
-        SimpleAuthenticationInfo simpleAuthorizationInfo=new SimpleAuthenticationInfo(usernamePasswordToken.getUsername(),usernamePasswordToken.getPassword(),getName());
+        SimpleAuthenticationInfo simpleAuthorizationInfo=new SimpleAuthenticationInfo(user.getNumber(),user.getPassword(),getName());
        /* SimpleAuthenticationInfo simpleAuthenticationInfo;
         //将传过来的AuthenticationToken转换为UsernamePasswordToken
         UsernamePasswordToken usernamePasswordToken=(UsernamePasswordToken)authenticationToken;
@@ -77,7 +77,6 @@ public class RealmDemo extends AuthorizingRealm{
         }else{
              simpleAuthenticationInfo = new SimpleAuthenticationInfo("-1", "0cb506c8c95a66e87c463bf1a270446c",byteSource, getName());
         }*/
-
         return simpleAuthorizationInfo;
     }
     //MD5加密

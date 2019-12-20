@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<form class="layui-form" action="/client/upda.do" method="post" lay-filter="example">
+    <input type="hidden" name="cid" th:value="${client.cid}" lay-verify="title" autocomplete="off" class="layui-input">
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户名</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="customername" th:value="${client.customername}" lay-verify="title" autocomplete="off" placeholder="请输入客户名" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户名拼音</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="spell" th:value="${client.spell}" lay-verify="title" autocomplete="off" placeholder="请输入客户名拼音" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户mm</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="type" th:value="${client.type}" lay-verify="title" autocomplete="off" placeholder="请输入客户mm" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户来源</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="source" th:value="${client.source}" lay-verify="title" autocomplete="off" placeholder="请输入客户来源" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属行业</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="industry" th:value="${client.industry}" lay-verify="title" autocomplete="off" placeholder="请输入所属行业" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户网址</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="Customersite" th:value="${client.Customersite}" lay-verify="title" autocomplete="off" placeholder="请输入客户网址" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属国家</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="state" th:value="${client.state}" lay-verify="title" autocomplete="off" placeholder="请输入国家" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属城市</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="city" th:value="${client.city}" lay-verify="title" autocomplete="off" placeholder="请输入所属城市" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">详细地址</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="detailedaddress" th:value="${client.detailedaddress}" lay-verify="title" autocomplete="off" placeholder="请输入详细地址" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮政编码</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="PostCode" th:value="${client.PostCode}" lay-verify="title" autocomplete="off" placeholder="请输入邮政编码" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">传真</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="fax" th:value="${client.fax}" lay-verify="title" autocomplete="off" placeholder="请输入传真" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系人</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="contact" th:value="${client.contact}" lay-verify="title" autocomplete="off" placeholder="请输入联系人" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="department" th:value="${client.department}" lay-verify="title" autocomplete="off" placeholder="请输入部门" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">职务</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="duty" th:value="${client.duty}" lay-verify="title" autocomplete="off" placeholder="请输入职务" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">办公电话</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="officephones"th:value="${client.officephones}" lay-verify="title" autocomplete="off" placeholder="请输入办公电话" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">移动电话</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="mobiletelephones"th:value="${client.mobiletelephones}" lay-verify="title" autocomplete="off" placeholder="请输入移动电话" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="post"th:value="${client.post}" lay-verify="title" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">法人代表</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="company" th:value="${client.company}"lay-verify="title" autocomplete="off" placeholder="请输入法人代表" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">注册资本</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="registeredcapital"th:value="${client.registeredcapital}" lay-verify="title" autocomplete="off" placeholder="请输入你的资本" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">附加说明</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="stated"th:value="${client.stated}" lay-verify="title" autocomplete="off" placeholder="请输入附加说明" class="layui-input">
+        </div>
+    </div>
+    银行信息=============================================
+    <div class="layui-form-item">
+        <label class="layui-form-label">银行账号</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="bankaccount" th:value="${client.bankaccount}"lay-verify="title" autocomplete="off" placeholder="请输入银行账号" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">开户名称</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="Account"th:value="${client.Account}" lay-verify="title" autocomplete="off" placeholder="请输入开户名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">开户银行</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="depositbank"th:value="${client.depositbank}" lay-verify="title" autocomplete="off" placeholder="请输入开户银行" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">银行地址</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="bankaddress" th:value="${client.bankaddress}"lay-verify="title" autocomplete="off" placeholder="请输入银行地址" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">税号</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="taxnumber" th:value="${client.taxnumber}"lay-verify="title" autocomplete="off" placeholder="请输入税号" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">电话</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="bankiphone" th:value="${client.bankiphone}"lay-verify="title" autocomplete="off" placeholder="请输入电话" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+</form>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(demo1)',function (data) {
+            if (data === '1') {
+                layer.msg("修改成功！", {
+                    icon: 6,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                })
+            } else {
+                layer.msg("修改失败！", {
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                })
+            }
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+           /* laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });*/
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                , "password": "123456"
+                , "interest": 1
+                , "like[write]": true //复选框选中状态
+                , "close": true //开关状态
+                , "sex": "女"
+                , "desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function () {
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

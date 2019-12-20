@@ -8,24 +8,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/layui/css/layui.css"  media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        .div1{
+            position: absolute;
+            height:1000px;
+            width:1000px;
+            top:10px;
+            left:350px;
+        }
+    </style>
 </head>
 <body>
-<div class="layui-form-item">
-    <div class="layui-inline">
-        <font size="4" color="#6495ed">售后服务分类:</font>&nbsp;&nbsp;&nbsp;
-        <a href="#" onclick="onEdit('-1')">所有分类</a>&nbsp;&nbsp;
-        <a href="#" onclick="onEdit('0')">处理中的服务</a>&nbsp;&nbsp;
-        <a href="#" onclick="onEdit('1')">已结束的服务</a>&nbsp;&nbsp;
-        <a href="#" onclick="onEdit('2')">已撤销的服务</a>&nbsp;&nbsp;
-        <a href="#">本周新增</a>&nbsp;&nbsp;
-        <a href="#">上周新增</a>&nbsp;&nbsp;
-        <a href="#">本月新增</a>&nbsp;&nbsp;
-        <a href="#">上月新增</a>&nbsp;&nbsp;
-        <a href="#">本季度新增</a>&nbsp;&nbsp;
-        <a href="#">上季度新增</a></font>
-        <hr>
+<div class="layui-col-md3">
+    <div class="layui-card">
+        <div class="layui-card-header"><b>分类</b></div>
+        <div class="layui-card-body">
+            <div  class="divcss5-b">
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('-1')">所有分类</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('0')">处理中的服务</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('1')">已结束的服务</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('2')">已撤销的服务</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('3')">本周新增</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('4')">上周新增</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('5')">本月新增</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('6')">上月新增</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('7')">本季度新增</a>&nbsp;&nbsp;<br>
+                <img class="img " src="/crm_css/u214.png"/>
+                <a href="#" onclick="onEdit('8')">上季度新增</a></font>
+            </div>
+            <br><br><br><br><br><br>
+        </div>
     </div>
 </div>
+<div class="div1">
 <form class="layui-form" action="" lay-filter="example">
     <div class="layui-form-item">
         <div class="layui-inline">
@@ -52,9 +76,9 @@
             </div>
         </div>
     </div>
-
 </form>
 <table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add">新增售后</button>
@@ -65,8 +89,11 @@
 </script>
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 
+<script id="usernameTpl" type="text/html">
+    <a href="/afterSaleXQ.do?id={{d.aid}}" class="layui-table-link" target="_blank">{{ d.theme }}</a>
+</script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['form','table'], function(){
         var table = layui.table;
@@ -77,52 +104,37 @@
             ,toolbar: '#toolbarDemo'
             ,title: '售后管理'
             ,cols: [[
-                {field:'aid', title:'ID', width:200,  unresize: true, sort: true,templet:'<div>{{d.LAY_INDEX}}</div>'}
-                ,{field:'theme', title:'售后主题', width:200}
-                ,{field:'typeservice', title:'服务类型', width:100}
-                ,{field:'starttime', title:'开始时间', width:120}
-                ,{field:'personnel', title:'服务人员', width:200}
-                ,{field:'Servicescore', title:'服务评分', width:100,sort: true}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                {field:'aid', title:'ID', width:100,  unresize: true, sort: true,templet:'<div>{{d.LAY_INDEX}}</div>'}
+                ,{field:'theme', title:'售后主题', width:150,templet: '#usernameTpl'}
+                ,{field:'typeservice', title:'服务类型', width:150}
+                ,{field:'starttime', title:'开始时间', width:180}
+                ,{field:'personnel', title:'服务人员', width:150}
+                /*,{field:'Servicescore', title:'服务评分', width:100}*/
             ]]
             ,page: true
-            ,limit:3
-            ,limits:[3,5,10]
         });
         //监听事件
         table.on('toolbar(test)', function(obj){
             var ev=obj.event;
             if(ev==='add'){
-                layer.open({
+                window.location.href='/aftersale/AfterSaleAdd.html'
+               /* layer.open({
                     title:'新增售后服务',
                     type: 2,
                     offset: 'auto',
                     shade: [0.8, '#393D49'],
-                    area: ['1000px', '800px'],
+                    area: ['1000px', '600px'],
                     content: '/aftersale/AfterSaleAdd.html',
                     end:function () {
                         table.reload('test', {});
                     }
-                });
+                });*/
             }
         });
         table.on('tool(test)', function(obj){
             var data = obj.data;
             var layEvent = obj.event;
-            if(layEvent === 'edit'){ //编辑
-                layer.open({
-                    type: 2,
-                    offset: 'auto',
-                    shade: [0.8, '#393D49'],
-                    area: ['1000px', '800px'],
-                    content: "/afterSaleXQ.do?id="+data.aid,
-                    end:function () {
-                        table.reload('test', {});
-                    }
-                });
-            }
         });
-
         form.on('submit(demo1)', function(data){
             table.reload('test', {
                 where: {
@@ -143,7 +155,6 @@
                 }
             });
         }
-
     });
 </script>
 </body>

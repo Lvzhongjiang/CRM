@@ -3,17 +3,19 @@ package com.hy.crm.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
  * @since 2019-12-04
  */
 @Data
+@TableName("client")
 public class Client  {
 
     private static final long serialVersionUID = 1L;
@@ -75,6 +77,10 @@ public class Client  {
     private String taxnumber;
 
     private String bankiphone;
+
+    private  Integer nid;
+
+    private String classif;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -292,7 +298,58 @@ public class Client  {
         return bankiphone;
     }
 
+    public Integer getNid() {
+        return nid;
+    }
+
+    public void setNid(Integer nid) {
+        this.nid = nid;
+    }
+
+    public String getClassif() {
+        return classif;
+    }
+
+    public void setClassif(String classif) {
+        this.classif = classif;
+    }
+
     public void setBankiphone(String bankiphone) {
         this.bankiphone = bankiphone;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "cid=" + cid +
+                ", customername='" + customername + '\'' +
+                ", spell='" + spell + '\'' +
+                ", type=" + type +
+                ", source='" + source + '\'' +
+                ", industry='" + industry + '\'' +
+                ", Customersite='" + Customersite + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", detailedaddress='" + detailedaddress + '\'' +
+                ", PostCode='" + PostCode + '\'' +
+                ", fax='" + fax + '\'' +
+                ", contact=" + contact +
+                ", department='" + department + '\'' +
+                ", duty='" + duty + '\'' +
+                ", officephones=" + officephones +
+                ", mobiletelephones=" + mobiletelephones +
+                ", post='" + post + '\'' +
+                ", company='" + company + '\'' +
+                ", registeredcapital='" + registeredcapital + '\'' +
+                ", stated='" + stated + '\'' +
+                ", bankaccount=" + bankaccount +
+                ", Account='" + Account + '\'' +
+                ", depositbank='" + depositbank + '\'' +
+                ", bankaddress='" + bankaddress + '\'' +
+                ", taxnumber='" + taxnumber + '\'' +
+                ", bankiphone='" + bankiphone + '\'' +
+                ", nid=" + nid +
+                ", classif='" + classif + '\'' +
+                '}';
     }
 }

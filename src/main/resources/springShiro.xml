@@ -10,20 +10,21 @@
         <property name="realm" ref="realmDemo"/>
     </bean>
 
+
     <bean  id="realmDemo" class="com.hy.crm.util.RealmDemo">
-        <property name="credentialsMatcher">
+        <!--<property name="credentialsMatcher">
             <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
                 <property name="hashAlgorithmName" value="MD5"></property>
                 <property name="hashIterations" value="1024"></property>
             </bean>
-        </property>
+        </property>-->
     </bean>
     <!--配置拦截器拦截规则-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!--必须配置-->
         <property name="securityManager" ref="securityManager" />
         <!-- 如果没有认证访问其他需要认证的连接则跳转到的页面 -->
-        <property name="loginUrl" value="/index.html" />
+        <property name="loginUrl" value="/login.html" />
 
         <!--
         	配置哪些页面需要受保护.
@@ -35,7 +36,6 @@
         -->
         <property name="filterChainDefinitions">
             <value>
-                /StudentList.html=perms["queryall"]
                 /log.do=anon
                 /login.html=anon
                 /**.do=authc

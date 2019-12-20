@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jobob
@@ -23,7 +23,7 @@ public class Documentary {
     private Integer did;
 
     private String docudate;
-
+    @TableId(value = "nname")
     private String docutheme;
 
     private String dname;
@@ -42,10 +42,6 @@ public class Documentary {
 
     public void setDid(Integer did) {
         this.did = did;
-    }
-
-    public String getDocudate() {
-        return docudate;
     }
 
     public void setDocudate(String docudate) {

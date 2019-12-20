@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<form class="layui-form" action="/newbusiness/upda.do" method="post" lay-filter="example">
+    <input type="hidden" name="nid" th:value="${newbusiness.nid}" lay-verify="title" autocomplete="off" class="layui-input">
+
+    ===============客户信息================
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户名称</label>
+        <div class="layui-input-block">
+            <select name="cid" id="cid" lay-filter="client">
+                <option value="">请选择</option>
+                <option th:each="listcl:${listcl}" th:selected="${listcl.cid==newbusiness.cid}"
+                        th:value="${listcl.cid}">[[${listcl.customername}]]
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属行业</label>
+        <div class="layui-input-block">
+            <input type="text" id="iid" th:name="industry"  lay-verify="title" autocomplete="off" readonly="readonly"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在城市</label>
+        <div class="layui-input-block">
+            <input type="text" id="tid" th:name="type" readonly="readonly"  lay-verify="title" autocomplete="off" placeholder="请输入所在城市" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">详细地址</label>
+        <div class="layui-input-block">
+            <input type="text" id="did" th:name="detailedaddress" readonly="readonly"  lay-verify="title" autocomplete="off" placeholder="请输入详细名称" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+    ===========商机信息============
+    <div class="layui-form-item">
+        <label class="layui-form-label">优先级</label>
+        <div class="layui-input-block">
+            <input type="radio" th:name="priority" th:value="高" title="男" th:checked="${newbusiness.priority eq '高'}">
+            <input type="radio" th:name="priority" th:value="中" title="中" th:checked="${newbusiness.priority eq '中'}">
+            <input type="radio" th:name="priority" th:value="低" title="低" th:checked="${newbusiness.priority eq '低'}">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商机名称</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="nname" th:value="${newbusiness.nname}" lay-verify="title" autocomplete="off" placeholder="请输入商机名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商机阶段</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="stage" th:value="${newbusiness.stage}" lay-verify="title" autocomplete="off" placeholder="请输入商机名称" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">预计成交金额</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="perdictmoney" th:value="${newbusiness.perdictmoney}" lay-verify="title" autocomplete="off" placeholder="请输入预计成交金额" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+    <div class="layui-inline">
+        <label class="layui-form-label">预计结单日期</label>
+        <div class="layui-input-inline">
+            <input type="text" th:name="preddate"  th:value="${newbusiness.preddate}"id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系人</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="iname" th:value="${newbusiness.iname}" lay-verify="title" autocomplete="off" placeholder="请输入联系人" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="section" th:value="${newbusiness.section}" lay-verify="title" autocomplete="off" placeholder="请输入部门" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">职务</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="post"  th:value="${newbusiness.post}"lay-verify="title" autocomplete="off" placeholder="请输入职务" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">固定电话</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="telephone" th:value="${newbusiness.telephone}" lay-verify="title" autocomplete="off" placeholder="请输入固定电话" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">移动电话</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="mophone" th:value="${newbusiness.mophone}" lay-verify="title" autocomplete="off" placeholder="请输入移动电话" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮件/QQ</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="qq" th:value="${newbusiness.qq}" lay-verify="title" autocomplete="off" placeholder="请输入邮箱QQ" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">相关附件</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="accessory" th:value="${newbusiness.accessory}" lay-verify="title" autocomplete="off" placeholder="请输入相关附件" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属部门</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="branch"  th:value="${newbusiness.branch}" lay-verify="title" autocomplete="off" placeholder="请输入所属部门" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商机负责人</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="principal" th:value="${newbusiness.principal}" lay-verify="title" autocomplete="off" placeholder="请输入商机负责人" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商机参与人</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="participant" th:value="${newbusiness.participant}" lay-verify="title" autocomplete="off" placeholder="请输入商机参与人" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商机关注人</label>
+        <div class="layui-input-block">
+            <input type="text" th:name="concerned" th:value="${newbusiness.concerned}" lay-verify="title" autocomplete="off" placeholder="请输入商机关注人" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+</form>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/jquery-3.3.1.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate','jquery'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            var $ = layui.jquery;
+        form.on('select(client)',function(data){
+            //alert("aaaaaaaaaaaa")
+            $("#message").hide();
+            $.ajax({
+                type : "GET",
+                contentType: "application/json;charset=UTF-8",
+                url : "/newbusiness/byid.do",
+                data:{cid:$("#cid").val()},
+                success : function(result) {
+                    var iid=document.getElementById("iid");
+                    var tid=document.getElementById("tid");
+                    var did=document.getElementById("did")
+                    if(result!=null){
+                        iid.value=result.industry;
+                        tid.value=result.type;
+                        did.value=result.detailedaddress;
+                    }
+                    form.render();
+                }
+            });
+        });
+
+        //监听提交
+        form.on('submit(demo1)',function (data) {
+            if (data === '1') {
+                layer.msg("修改成功！", {
+                    icon: 6,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                })
+            } else {
+                layer.msg("修改失败！", {
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                })
+            }
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+           /* laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });*/
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                , "password": "123456"
+                , "interest": 1
+                , "like[write]": true //复选框选中状态
+                , "close": true //开关状态
+                , "sex": "女"
+                , "desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function () {
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+</script>
+</body>
+</html>

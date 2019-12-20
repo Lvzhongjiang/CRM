@@ -1,5 +1,8 @@
 package com.hy.crm.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hy.crm.entity.ContractManagement;
 import com.hy.crm.entity.User;
 import com.hy.crm.mapper.UserMapper;
 import com.hy.crm.service.IUserService;
@@ -22,5 +25,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     public void saves(User user){
         userMapper.inser(user);
+    }
+
+    public IPage<User> queryPage(Integer pageNum, Integer size) {
+        Page<User> page = new Page<>(pageNum,size);
+        page.setRecords(userMapper.queryAll(page));
+        return page;
     }
 }
