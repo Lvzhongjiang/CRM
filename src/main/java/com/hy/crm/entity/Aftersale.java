@@ -54,7 +54,7 @@ public class Aftersale {
     private String personnel;
 
     @TableField("Servicescore")
-    private String Servicescore;
+    private String servicescore;
 
     private String attachment;
 
@@ -191,11 +191,11 @@ public class Aftersale {
     }
 
     public String getServicescore() {
-        return Servicescore;
+        return servicescore;
     }
 
     public void setServicescore(String servicescore) {
-        this.Servicescore = servicescore;
+        this.servicescore = servicescore;
     }
 
     public String getAttachment() {

@@ -6,6 +6,8 @@ import com.hy.crm.entity.Role;
 import com.hy.crm.entity.RolePer;
 import com.hy.crm.entity.UserRole;
 import com.hy.crm.service.*;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,7 @@ public class RolePerController {
      * @param
      * @return
      */
+    @RequiresRoles(value = {"管理员"})
     @RequestMapping("/queryById.do")
     //@RequiresPermissions("userRole/queryById.do")
     public String  queryById(Integer roleId, Model model){

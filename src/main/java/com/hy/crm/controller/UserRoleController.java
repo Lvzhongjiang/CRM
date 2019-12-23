@@ -12,6 +12,7 @@ import com.hy.crm.util.LayuiData;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,8 @@ public class UserRoleController {
      * @param uid
      * @return
      */
+    @RequiresRoles(value = {"管理员"})
     @RequestMapping("/queryById.do")
-    //@RequiresPermissions("userRole/queryById.do")
     public String  queryById(Integer uid, Model model){
         //根据id查询用户信息
         model.addAttribute("user",iUserService.getById(uid));

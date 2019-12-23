@@ -6,6 +6,8 @@ import com.hy.crm.entity.ContractManagement;
 import com.hy.crm.entity.RegisterIncome;
 import com.hy.crm.service.IContractManagementService;
 import com.hy.crm.service.IRegisterIncomeService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,6 +37,7 @@ public class RegisterIncomeController {
      * @return
      */
     @RequestMapping("/toAddRegisterList.do")
+    @RequiresRoles(value = {"管理员","项目经理"},logical = Logical.OR)
     public ModelAndView toAddRegisterList(String contName) {
         ModelAndView modelAndView = new ModelAndView();
         ContractManagement contract = iRegisterIncomeService.contId(contName);

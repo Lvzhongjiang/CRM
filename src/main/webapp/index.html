@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8" />
@@ -59,15 +59,16 @@
 					</li>
 					<li class=" li-border">
 						<a id="drop_menu" href="javascript:void(0)" class="dropdown-toggle mystyle-color" data-toggle="dropdown">
-							605875855@qq.com
+							<!--[[${session.user1.number}]]-->
+							登陆成功
 							<span class="caret"></span>
 						</a>
 						<div class="user-menu">
 							<span class="jiao"></span>
 							<ul>
-								<li id="xiuGai_pwd" data-toggle="modal" data-target="#myModal1">
+								<!--<li id="xiuGai_pwd" data-toggle="modal" data-target="#myModal1">
 									<a href="javascript:void(0)">修改密码</a>
-								</li>
+								</li>-->
 								<li>
 									<a href="login.html">退出</a>
 								</li>

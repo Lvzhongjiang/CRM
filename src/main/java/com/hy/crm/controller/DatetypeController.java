@@ -9,6 +9,7 @@ import com.hy.crm.entity.ContractManagement;
 import com.hy.crm.entity.Datetype;
 import com.hy.crm.service.IDatetypeService;
 import com.hy.crm.util.LayuiData;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,7 @@ public class DatetypeController{
         }
         return is;
     }
+    @RequiresRoles(value = {"管理员","项目经理","组长"},logical = Logical.OR)
     @RequestMapping("/toUpdateDateTypeList.do")
     public ModelAndView toUpdateDateTypeList(Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -98,7 +100,7 @@ public class DatetypeController{
         }
         return is;
     }
-
+    @RequiresRoles(value = {"管理员","项目经理","组长"},logical = Logical.OR)
     @RequestMapping(value = "/deleteDateType.do")
     @ResponseBody
     public String deleteDateType(Integer id) {

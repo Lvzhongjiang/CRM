@@ -4,6 +4,8 @@ package com.hy.crm.controller;
 import com.hy.crm.entity.ContractManagement;
 import com.hy.crm.entity.InvoiceApplication;
 import com.hy.crm.service.IInvoiceApplicationService;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +32,7 @@ public class InvoiceApplicationController{
      *
      * @return
      */
+    @RequiresRoles(value = {"管理员","项目经理"},logical = Logical.OR)
     @RequestMapping("/toAddInvoiceList.do")
     public ModelAndView toAddInvoiceList(String contName) {
         ModelAndView modelAndView = new ModelAndView();
