@@ -12,6 +12,8 @@ import com.hy.crm.service.IContractManagementService;
 import com.hy.crm.service.IInvoiceApplicationService;
 import com.hy.crm.service.IRegisterIncomeService;
 import com.hy.crm.util.LayuiData;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,6 +76,7 @@ public class ContractManagementController {
      *
      * @return
      */
+    @RequiresRoles(value = {"管理员","项目经理","组长"},logical = Logical.OR)
     @RequestMapping("/toAddContractList.do")
     public ModelAndView toAddContractList(String contName) {
         ModelAndView modelAndView = new ModelAndView();
@@ -105,7 +108,7 @@ public class ContractManagementController {
         }
         return is;
     }
-
+    @RequiresRoles(value = {"管理员","项目经理","组长"},logical = Logical.OR)
     @RequestMapping("/toUpdateContractList.do")
     public ModelAndView toUpdateContractList(String contName) {
         ModelAndView modelAndView = new ModelAndView();
@@ -132,7 +135,7 @@ public class ContractManagementController {
         }
         return is;
     }
-
+    @RequiresRoles(value = {"管理员","项目经理","组长"},logical = Logical.OR)
     @RequestMapping("/selectContractList.do")
     public ModelAndView selectContractList(String contName) {
         ModelAndView modelAndView = new ModelAndView();

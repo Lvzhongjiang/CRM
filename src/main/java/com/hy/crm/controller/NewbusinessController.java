@@ -83,7 +83,7 @@ public class NewbusinessController {
     @ResponseBody
     public LayuiData querralle(Newbusiness business, Integer page, Integer limit, HttpServletRequest request) {
         Page<Busbo> page1=new Page<>(page,limit);
-        User user=(User) request.getSession().getAttribute("user");
+        User user=(User) request.getSession().getAttribute("users");
        String username= user.getNumber();
 
         List<Busbo> citlist = newbusinessService.busbose(business.getNname(),business.getStage(),business.getPrincipal(),business.getBranch(),business.getPerdictmoney(),page1,username);

@@ -3,13 +3,12 @@ package com.hy.crm.controller;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.hy.crm.entity.Client;
-import com.hy.crm.entity.ContractManagement;
-import com.hy.crm.entity.ForumManagement;
-import com.hy.crm.entity.Reply;
+import com.hy.crm.entity.*;
 import com.hy.crm.service.IForumManagementService;
 import com.hy.crm.service.IReplyService;
 import com.hy.crm.util.LayuiData;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +49,7 @@ public class ForumManagementController {
      */
     @ResponseBody
     @RequestMapping("/forumList.do")
-    public LayuiData forumList(Integer forumId,String forum, String keyword, Integer page, Integer limit) {
+    public LayuiData forumList(Integer forumId, String forum, String keyword, Integer page, Integer limit) {
         IPage<ForumManagement> iPage = iForumManagementService.queryPage(forum, keyword, page, limit);
         LayuiData layui = new LayuiData();
         layui.setCode(0);
@@ -63,9 +63,11 @@ public class ForumManagementController {
 
     @RequestMapping("/addForumList.do")
     @ResponseBody
-    public String addForumList(ForumManagement forumManagement) {
+    public String addForumList(ForumManagement forumManagement, HttpServletRequest request) {
         String is = "1";
         try {
+            User user = (User) request.getSession().getAttribute("user1");
+            forumManagement.setAuthor(user.getNumber());
             forumManagement.setReplytime(new Date());
             iForumManagementService.save(forumManagement);
         } catch (Exception e) {
@@ -75,6 +77,7 @@ public class ForumManagementController {
         return is;
     }
 
+    @RequiresRoles(value = {"管理员", "项目经理", "组长"}, logical = Logical.OR)
     @RequestMapping("/tieZiById.do")
     public ModelAndView tieZiById(Integer forumId) {
         ModelAndView modelAndView = new ModelAndView();
@@ -88,8 +91,8 @@ public class ForumManagementController {
         return modelAndView;
     }
 
+    @RequiresRoles(value = {"管理员", "项目经理"}, logical = Logical.OR)
     @RequestMapping(value = "/deleteForumId.do")
-    // @ResponseBody
     public String deleteForumId(Integer forumId) {
         try {
             iForumManagementService.removeById(forumId);
@@ -101,6 +104,7 @@ public class ForumManagementController {
     }
 
     @RequestMapping("/forumById.do")
+    @RequiresRoles(value = {"管理员"})
     public ModelAndView forumById(Integer forumId) {
         ModelAndView modelAndView = new ModelAndView();
         ForumManagement forumManagement = iForumManagementService.getById(forumId);

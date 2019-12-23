@@ -2,18 +2,28 @@ package com.hy.crm.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hy.crm.entity.User;
+import com.hy.crm.service.IPermissionService;
+import com.hy.crm.service.IRoleService;
 import com.hy.crm.service.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
+import java.util.List;
+
 public class RealmDemo extends AuthorizingRealm{
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IRoleService iRoleService;
+    @Autowired
+    private IPermissionService iPermissionService;
     /**
      * 授权
      * @param principalCollection
@@ -21,6 +31,18 @@ public class RealmDemo extends AuthorizingRealm{
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //1、先拿到用户名
+        String userName=(String) principalCollection.getPrimaryPrincipal();
+        //2、根据用户名查询数据库得到角色和权限
+        //角色
+        List<String> roleNameList = iRoleService.byName_RoleName(userName);
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        authorizationInfo.setRoles(new HashSet<String>(roleNameList));
+        //权限
+        List<String> permissionsList = iPermissionService.getPname(userName);
+        authorizationInfo.addStringPermissions(permissionsList);
+        return authorizationInfo;
+
         /*Object object=principalCollection.getPrimaryPrincipal();
         //调用数据库查询用户名
         QueryWrapper<User> queryWrapper=new QueryWrapper<>();
@@ -43,8 +65,8 @@ public class RealmDemo extends AuthorizingRealm{
         //3、返回授权的信息类
         SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(roles);
-        authorizationInfo.addStringPermissions(permission);*/
-        return null;
+        authorizationInfo.addStringPermissions(permission);
+        return null;*/
     }
     /**
      * 认证

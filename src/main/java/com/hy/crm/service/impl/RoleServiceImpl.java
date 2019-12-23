@@ -12,6 +12,8 @@ import com.hy.crm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -22,5 +24,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
-
+   @Autowired
+   private RoleMapper roleMapper;
+   public List<String> byName_RoleName(String userName){
+       return  roleMapper.byName_RoleName(userName);
+   }
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * <p>
@@ -37,13 +36,15 @@ public class UserController{
     private IUserService userService;
     @RequestMapping("/log.do")
     public String  Log(@RequestParam("number")String number, @RequestParam("password")String password, HttpServletRequest request){
-        UsernamePasswordToken Token = new UsernamePasswordToken(number, password);
-        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken Token=new UsernamePasswordToken(number,password);
+        Subject subject= SecurityUtils.getSubject();
         subject.login(Token);
-        User user = userService.getOne(new QueryWrapper<User>().eq("number",number));
-        request.getSession().setAttribute("user", user);
-        User users = userService.getOne(new QueryWrapper<User>());
-        subject.getSession().setAttribute("users", users);
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("number",number);
+        User user=userService.getOne(queryWrapper);
+        request.getSession().setAttribute("user1",user);
+       User users=userService.getOne(new QueryWrapper<User>());
+       subject.getSession().setAttribute("users",users);
         return "redirect:/index.html";
 
     }
@@ -52,18 +53,6 @@ public class UserController{
     public String reis(User user){
         userService.saves(user);
         return "redirect:/login.html";
-    }
-    @RequestMapping("/bunu.do")
-    @ResponseBody
-    public String zhuce(String number){
-        String msg;
-       User user=userService.getOne(new QueryWrapper<User>().eq("number",number));
-        if(null!=user){
-            msg="1";
-        }else {
-            msg="2";
-        }
-        return  msg;
     }
 
 

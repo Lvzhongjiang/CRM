@@ -4,7 +4,11 @@ import com.hy.crm.entity.Permission;
 import com.hy.crm.mapper.PermissionMapper;
 import com.hy.crm.service.IPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -16,5 +20,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
+    @Autowired
+    private PermissionMapper permissionMapper;
 
+    public List<String> getPname(String name){
+        return permissionMapper.getPname(name);
+    }
 }
