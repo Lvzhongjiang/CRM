@@ -34,8 +34,8 @@ public class NewbusinessServiceImpl extends ServiceImpl<NewbusinessMapper, Newbu
     public  List<Newbusiness> selectbus(Integer cid){
         return newbusinessMapper.selectbu(cid);
     }
-    public List<Busbo> busbos(String nname, String stage, String principal, String branch, Integer perdictmoney, Page<Busbo> page){
-        List<Busbo>buslist=newbusinessMapper.select(nname,stage,principal,branch,perdictmoney,page);
+    public List<Busbo> busbos(Page<Busbo> page,Newbusiness newbusiness,Integer cid,String name){
+        List<Busbo>buslist=newbusinessMapper.select(page,newbusiness,cid,name);
         List<Busbo> bolist=new ArrayList<>();
         for(Busbo bus:buslist){
             Busbo butt=new Busbo();

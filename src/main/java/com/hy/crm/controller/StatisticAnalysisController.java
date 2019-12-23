@@ -48,7 +48,7 @@ public class StatisticAnalysisController {
         String day5=DataUtile.getLastQuarter();
         //本周商机数
         QueryWrapper<Newbusiness> queryWrapper=new QueryWrapper<>();
-        User user=(User) request.getSession().getAttribute("user1");
+        User user=(User) request.getSession().getAttribute("users");
         model.addAttribute("name",user.getNumber());
         queryWrapper.ge("ntime",day.split(",")[0]);
         queryWrapper.le("ntime",day.split(",")[1]);

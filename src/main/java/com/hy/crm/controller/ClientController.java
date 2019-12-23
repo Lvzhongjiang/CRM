@@ -59,6 +59,7 @@ public class ClientController {
         layuiData.setCode(0);
         Page ipage=PageHelper.startPage(page,limit,true);
         List<NewCit> citList=clientService.querrClent(cha,xie);
+        System.out.println(citList);
         Long l= ipage.getTotal();
         layuiData.setCount(l.intValue());
         layuiData.setData(citList);

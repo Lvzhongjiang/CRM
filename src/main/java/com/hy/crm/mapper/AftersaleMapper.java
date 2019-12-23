@@ -45,6 +45,7 @@ public interface AftersaleMapper extends BaseMapper<Aftersale> {
 
     @Select("SELECT COUNT(aid) FROM aftersale a,CLIENT c WHERE a.clientid=c.cid AND c.cid=#{value}")
     public Integer countaftet(Integer cid);
+
     @Select("SELECT AVG(a.Servicescore) FROM aftersale a,CLIENT c WHERE a.clientid=c.cid AND c.cid=#{value}")
     public Integer sumaftet(Integer cid);
 

@@ -47,6 +47,20 @@
         <property name="templateEngine" ref="templateEngine" />
         <property name="characterEncoding"  value="UTF-8" />
     </bean>
+    <!-- 配置SpringMVC的异常解析器 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- 发生授权异常时，跳到指定页 -->
+                <prop  key="org.apache.shiro.authc.UnknownAccountException">/name.html</prop>
+                <prop key="org.apache.shiro.authc.IncorrectCredentialsException">/password.html</prop>
+
+                <!--SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException-->
+                <!--遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/error_fileupload.jsp页面-->
+                <!-- <propkey="org.springframework.web.multipart.MaxUploadSizeExceededException">WEB-INF/error_fileupload</prop>-->
+            </props>
+        </property>
+    </bean>
 <!--
     &lt;!&ndash;导入poi的配置类&ndash;&gt;
     <bean class="com.hy.crm.util." />-->

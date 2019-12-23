@@ -8,6 +8,7 @@ import com.hy.crm.entity.UserRole;
 import com.hy.crm.service.IRoleService;
 import com.hy.crm.service.IUserRoleService;
 import com.hy.crm.service.IUserService;
+import com.hy.crm.service.impl.UserServiceImpl;
 import com.hy.crm.util.LayuiData;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -74,4 +76,5 @@ public class UserRoleController {
         }
         return i;
     }
+
 }

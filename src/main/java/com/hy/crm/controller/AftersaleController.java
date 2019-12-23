@@ -57,7 +57,8 @@ public class AftersaleController{
     * */
     @RequestMapping("afterSaleList.do")
     @ResponseBody
-    public LayuiData  list(Integer page,Integer limit,String type,String title,String id){
+    public LayuiData  list(Integer page,Integer limit,String type,String title,String id,HttpServletRequest request){
+        Integer cid=(Integer) request.getSession().getAttribute("cid");
         //获取本周开始和结束
         String day= DataUtile.getTimeInterval(new Date());
         //获取上一周的开始和结束
@@ -94,6 +95,9 @@ public class AftersaleController{
             }else if(type.equals("5")){
                 aftersaleQueryWrapper.eq("Servicescore",title);
             }
+        }
+        if(cid!=null&&cid!=0){
+            aftersaleQueryWrapper.eq("clientid",cid);
         }
         if(id!=null&&!"".equals(id)){
             if("0".equals(id)|"1".equals(id)|"2".equals(id)){
@@ -242,6 +246,11 @@ public class AftersaleController{
         model.addAttribute("businessCount",newbusinessService.list(new QueryWrapper<Newbusiness>()).size());
         model.addAttribute("contractCount",clientService.list(new QueryWrapper<Client>()).size());
         return "/aftersale/mydesktop.html";
+    }
+    @RequestMapping(value = "cidSisson.do")
+    public String cidSisson(HttpServletRequest request,Integer cid) {
+        request.getSession().setAttribute("cid",cid);
+        return "/aftersale/AfterSale.html";
     }
     @RequestMapping(value = "myHomeAF.do",produces = "application/json; charset=utf-8")
     @ResponseBody

@@ -16,7 +16,7 @@ public class NewCit {
    //回款额
     private  double retmoney;
     //售后服务数
-    private Integer Contafter;
+    private Integer contafter;
     //服务均分
     private double avgafter;
     private Integer nid;
@@ -79,11 +79,11 @@ public class NewCit {
     }
 
     public Integer getContafter() {
-        return Contafter;
+        return contafter;
     }
 
     public void setContafter(Integer contafter) {
-        Contafter = contafter;
+        this.contafter = contafter;
     }
 
     public double getAvgafter() {
@@ -109,4 +109,22 @@ public class NewCit {
     public void setPerdictmoney(Integer perdictmoney) {
         this.perdictmoney = perdictmoney;
     }
+
+    @Override
+    public String toString() {
+        return "NewCit{" +
+                "cid=" + cid +
+                ", customername='" + customername + '\'' +
+                ", buscount=" + buscount +
+                ", perdictmoney=" + perdictmoney +
+                ", conttract=" + conttract +
+                ", contMany=" + contMany +
+                ", retmoney=" + retmoney +
+                ", contafter=" + contafter +
+                ", avgafter=" + avgafter +
+                ", nid=" + nid +
+                ", classif='" + classif + '\'' +
+                '}';
+    }
 }
+

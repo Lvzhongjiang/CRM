@@ -17,6 +17,6 @@ import java.util.List;
  */
 public interface INewbusinessService extends IService<Newbusiness> {
     public List<Newbusiness> selectbus(Integer cid);
-    public List<Busbo> busbos(String nname, String stage, String principal, String branch, Integer perdictmoney, Page<Busbo> page);
+    public List<Busbo> busbos(Page<Busbo> page,Newbusiness newbusiness,Integer cid,String name);
     public List<Busbo> busbose(String nname, String stage, String principal, String branch, Integer perdictmoney, Page<Busbo> page,String username);
 }

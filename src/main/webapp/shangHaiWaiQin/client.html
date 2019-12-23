@@ -83,9 +83,9 @@
 				,{field:'buscount', title:'商机数',templet:'#shangji', width:100}
 				,{field:'perdictmoney', title:'预计成交金额', width:120}
 				,{field:'conttract', title:'合同数', width:200}
-				,{field:'contMany', title:'合同金额', width:100,sort: true}
+				,{field:'contMany', title:'合同金额', width:100}
 				,{field:'retmoney', title:'回款额', width:100,sort: true}
-				,{field:'Contafter', title:'售后服务数', width:100,sort: true}
+				,{field:'contafter', title:'售后服务数',templet:'#shouhou', width:100,sort: true}
 				,{field:'avgafter', title:'服务均分', width:100,sort: true}
 				,{field:'classif', title:'客户分类', width:100,sort: true}
 				,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
@@ -224,6 +224,10 @@
 </script>
 <script type="text" id="shangji">
     <a href="/busin.html?cid={{d.cid}}" class="layui-table-link" target="_blank">{{d.buscount}}</a>
+</script>
+
+<script type="text" id="shouhou">
+    <a href="/cidSisson.do?cid={{d.cid}}" class="layui-table-link" target="_blank">{{d.contafter}}</a>
 </script>
 
 </body>

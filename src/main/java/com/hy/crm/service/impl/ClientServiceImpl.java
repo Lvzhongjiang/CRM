@@ -61,7 +61,7 @@ public class ClientServiceImpl extends ServiceImpl<ClientMapper, Client> impleme
             cit.setBuscount(newbusinessMapper.count(client.getCid()));
             cit.setPerdictmoney(newbusinessMapper.sumper(client.getCid()));
             cit.setConttract(clientMapper.count(client.getCid()));
-            cit.setContMany(clientMapper.sum(client.getCid()));
+            cit.setContMany(contractManagementMapper.summoney(client.getCid()));
             Integer a=registerIncomeMapper.regsum(client.getCid());
             if(a==null){
                 cit.setRetmoney(0);
@@ -69,6 +69,7 @@ public class ClientServiceImpl extends ServiceImpl<ClientMapper, Client> impleme
                 cit.setRetmoney(a);
             }
             cit.setContafter(aftersaleMapper.countaftet(client.getCid()));
+            System.out.println("======"+cit.getContafter());
             Integer c=aftersaleMapper.sumaftet(client.getCid());
             if(c==null){
                 cit.setAvgafter(0);

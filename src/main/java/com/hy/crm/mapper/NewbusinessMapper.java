@@ -5,6 +5,7 @@ import com.hy.crm.bo.Busbo;
 import com.hy.crm.entity.Dome;
 import com.hy.crm.entity.Newbusiness;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
@@ -32,8 +33,8 @@ public interface NewbusinessMapper extends BaseMapper<Newbusiness> {
     public Integer docudate(Integer cid);
 
     @SelectProvider(type = Dome.class,method = "busquerr")
-    public List<Busbo> select(String nname,String stage,String principal,String branch,Integer perdictmoney,Page<Busbo> page);
+    public List<Busbo> select(Page<Busbo> page,@Param("bus") Newbusiness newbusiness,@Param("cid") Integer cid,@Param("name") String name);
 
-    @SelectProvider(type = Dome.class,method = "busquerr")
-    public List<Busbo> selecte(String nname,String stage,String principal,String branch,Integer perdictmoney,Page<Busbo> page,String username);
+    @SelectProvider(type = Dome.class,method = "mybusquerr")
+    public List<Busbo> selecte(String nname,String stage,String principal,String branch,Integer perdictmoney,Page<Busbo> page,@Param("username") String username);
 }

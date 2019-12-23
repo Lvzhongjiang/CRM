@@ -61,9 +61,9 @@ public class NewbusinessController {
 
     @RequestMapping("/querrall.do")
     @ResponseBody
-    public LayuiData querrall(Newbusiness business,Integer page, Integer limit) {
+    public LayuiData querrall(Newbusiness business,Integer page, Integer limit,Integer cid,String name) {
         Page<Busbo> page1=new Page<>(page,limit);
-        List<Busbo> citlist = newbusinessService.busbos(business.getNname(),business.getStage(),business.getPrincipal(),business.getBranch(),business.getPerdictmoney(),page1);
+        List<Busbo> citlist = newbusinessService.busbos(page1,business,cid,name);
         //PageInfo<Busbo>pageInfo=new PageInfo<>(citlist);
         page1.setRecords(citlist);
         LayuiData layuiData = new LayuiData();
@@ -83,7 +83,7 @@ public class NewbusinessController {
     @ResponseBody
     public LayuiData querralle(Newbusiness business, Integer page, Integer limit, HttpServletRequest request) {
         Page<Busbo> page1=new Page<>(page,limit);
-        User user=(User) request.getSession().getAttribute("users");
+        User user=(User) request.getSession().getAttribute("user");
        String username= user.getNumber();
 
         List<Busbo> citlist = newbusinessService.busbose(business.getNname(),business.getStage(),business.getPrincipal(),business.getBranch(),business.getPerdictmoney(),page1,username);

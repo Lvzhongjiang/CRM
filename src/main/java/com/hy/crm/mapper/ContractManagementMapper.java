@@ -20,8 +20,8 @@ import java.util.List;
  * @since 2019-12-04
  */
 public interface ContractManagementMapper extends BaseMapper<ContractManagement> {
-    @Select("SELECT SUM(contMany) FROM contract_management")
-    public List<ContractManagement> summoney();
+    @Select("SELECT SUM(contMany) FROM contract_management where cid=#{value}")
+    public Integer summoney(Integer cid);
     /**
      * 模糊查询  分页
      *

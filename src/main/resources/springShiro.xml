@@ -37,6 +37,9 @@
         <property name="filterChainDefinitions">
             <value>
                 /log.do=anon
+                /reis.do=anon
+                /bunu.do=anon
+                /rids.html=anon
                 /login.html=anon
                 /**.do=authc
                 /**.html=authc
